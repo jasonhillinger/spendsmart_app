@@ -1,4 +1,4 @@
-package com.example.spendsmart;
+package com.example.spendsmart_soen357_app;
 
 import org.junit.Test;
 

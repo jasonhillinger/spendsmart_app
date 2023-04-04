@@ -1,4 +1,4 @@
-package com.example.spendsmart;
+package com.example.spendsmart_soen357_app;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.spendsmart", appContext.getPackageName());
+        assertEquals("com.example.spendsmart_soen357_app", appContext.getPackageName());
     }
 }
