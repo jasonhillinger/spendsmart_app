@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "450789117524",
+    "firebase_url": "https://spendsmart-38bf7-default-rtdb.firebaseio.com",
+    "project_id": "spendsmart-38bf7",
+    "storage_bucket": "spendsmart-38bf7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450789117524:android:73e20d710549deb28da7c1",
+        "android_client_info": {
+          "package_name": "com.example.spendsmart_soen357_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450789117524-g10l65rmov9ud6cj3rs4ouq51h5653s1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFQr4LokyCOihxc4OjXxCuyiI2LH-TmKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "450789117524-g10l65rmov9ud6cj3rs4ouq51h5653s1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

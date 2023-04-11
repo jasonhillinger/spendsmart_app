@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.spendsmart_soen357_app.databinding.ActivityMainBinding;
+import com.example.spendsmart_soen357_app.Callback;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +33,24 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        DatabaseController db = new DatabaseController();
+
+        // Call the login function with the desired username and password
+        String username = "jack";
+        String password = "123";
+        db.login(username, password, new Callback<Boolean>() {
+            @Override
+            public void onCallback(Boolean success) {
+                if (success) {
+                    System.out.println("Success");
+                    // Login successful, do something here
+                } else {
+                    // Login failed, do something here
+                    System.out.println("Failure");
+                }
+            }
+        });
     }
 
 }
