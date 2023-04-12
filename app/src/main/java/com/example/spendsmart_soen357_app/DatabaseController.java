@@ -32,7 +32,6 @@ public class DatabaseController {
     }
 
     // Gets transactions for the logged in user
-    // todo: to be implemented
     public void getTransactions(Callback<JSONArray> callback) {
         DatabaseReference transactionsRef = database.getReference("transactions");
         Query query = transactionsRef.orderByChild("username").equalTo(LOGGEDIN_USERNAME);
