@@ -21,7 +21,19 @@ public class DatabaseController {
         new LoginTask(username, password,  callback).execute();
     }
 
-    public void addTransaction(int amount){}
+    // Gets transactions for the logged in user
+    // todo: to be implemented
+    public void getTransactions(int amount){}
+
+    // todo: to be implemented
+    public String getSavingAccountFunds(){
+        return "";
+    }
+
+    // todo: to be implemented
+    public String getCheckingAccountFuncts(){
+        return "";
+    }
 
     // Adds (or subtracts if given a negative number) to the logged in username's checking account balance
     public void addCheckingAccountFunds(int amount){
@@ -32,13 +44,14 @@ public class DatabaseController {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     // Get the current value of the checking_account child node
-                    int currentBalance = dataSnapshot.getValue(Integer.class);
+                    String currentBalance = dataSnapshot.getValue(String.class);
 
                     // Add the amount to the current balance
-                    int newBalance = currentBalance + amount;
+                    int newBalance = Integer.parseInt(currentBalance) + amount;
+                    String newBal = Integer.toString(newBalance);
 
                     // Update the checking_account child node with the new balance
-                    userRef.setValue(newBalance);
+                    userRef.setValue(newBal);
                 }
 
                 @Override
@@ -48,6 +61,7 @@ public class DatabaseController {
             });
         } else {
             // Handle the case where LOGGEDIN_USERNAME is null
+            return;
         }
     }
 
@@ -60,13 +74,14 @@ public class DatabaseController {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     // Get the current value of the checking_account child node
-                    int currentBalance = dataSnapshot.getValue(Integer.class);
+                    String currentBalance = dataSnapshot.getValue(String.class);
 
                     // Add the amount to the current balance
-                    int newBalance = currentBalance + amount;
+                    int newBalance = Integer.parseInt(currentBalance) + amount;
+                    String newBal = Integer.toString(newBalance);
 
                     // Update the checking_account child node with the new balance
-                    userRef.setValue(newBalance);
+                    userRef.setValue(newBal);
                 }
 
                 @Override
@@ -76,8 +91,10 @@ public class DatabaseController {
             });
         } else {
             // Handle the case where LOGGEDIN_USERNAME is null
+            return;
         }
     }
+
 
     // Android multithreading bs, used for login
     private class LoginTask extends AsyncTask<Void, Void, Boolean> {
