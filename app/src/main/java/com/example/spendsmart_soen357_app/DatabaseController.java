@@ -1,9 +1,18 @@
 package com.example.spendsmart_soen357_app;
 
 import android.os.AsyncTask;
+
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.*;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class DatabaseController {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -24,9 +33,49 @@ public class DatabaseController {
 
     // Gets transactions for the logged in user
     // todo: to be implemented
-    public void getTransactions(int amount){}
+    public void getTransactions(Callback<JSONArray> callback) {
+        DatabaseReference transactionsRef = database.getReference("transactions");
+        Query query = transactionsRef.orderByChild("username").equalTo(LOGGEDIN_USERNAME);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                JSONArray transactionsJsonArray = new JSONArray();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    try {
+                        // convert transaction data to JSON and add it to the array
+                        JSONObject transactionJson = new JSONObject();
+                        transactionJson.put("id", dataSnapshot.getKey());
+                        transactionJson.put("account", dataSnapshot.child("account").getValue());
+                        transactionJson.put("amount", dataSnapshot.child("amount").getValue());
+                        transactionJson.put("category", dataSnapshot.child("category").getValue());
+//                        transactionJson.put("date", dataSnapshot.child("date").getValue()); // TODO: maybe implement date of purchase
+                        transactionJson.put("subject", dataSnapshot.child("subject").getValue());
+                        transactionJson.put("type", dataSnapshot.child("type").getValue());
+                        transactionJson.put("username", dataSnapshot.child("username").getValue());
+                        transactionsJsonArray.put(transactionJson);
+                    } catch (JSONException e) {
+                        // handle the error
+                        callback.onCallback(null);
+                        return;
+                    } catch (Exception a) {
+                        a.printStackTrace();
+                    }
+                }
+                callback.onCallback(transactionsJsonArray);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // handle the error
+                callback.onCallback(null);
+            }
+        });
+    }
 
 
+
+    // gets the saving account funds of the logged in user
     public void getSavingAccountFunds(Callback<String> callback){
         if (LOGGEDIN_USERNAME != null) {
             DatabaseReference userRef = database.getReference("users").child(this.LOGGEDIN_USERNAME).child("saving_account");
@@ -51,7 +100,8 @@ public class DatabaseController {
         }
     }
 
-    // todo: to be implemented
+
+    // Gets the checking account funds for the logged in user
     public void getCheckingAccountFunds(Callback<String> callback){
         if (LOGGEDIN_USERNAME != null) {
             DatabaseReference userRef = database.getReference("users").child(this.LOGGEDIN_USERNAME).child("checking_account");

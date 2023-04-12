@@ -13,6 +13,10 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.spendsmart_soen357_app.databinding.ActivityMainBinding;
 import com.example.spendsmart_soen357_app.Callback;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         DatabaseController db = new DatabaseController();
 
         // Call the login function with the desired username and password
-        String username = "jack";
+        String username = "Jackey";
         String password = "123";
         db.login(username, password, new Callback<Boolean>() {
             @Override
@@ -63,6 +67,15 @@ public class MainActivity extends AppCompatActivity {
                             System.out.println(data);
                         }
                     });
+
+                    //Sample code to get transactions for user
+                    db.getTransactions(new Callback<JSONArray>() {
+                        @Override
+                        public void onCallback(JSONArray data) {
+                            System.out.println(data);
+                        }
+                    });
+
 
 
                 } else {
