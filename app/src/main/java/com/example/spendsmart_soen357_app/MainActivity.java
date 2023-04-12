@@ -43,14 +43,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCallback(Boolean success) {
                 if (success) {
+                    db.setLOGGEDIN_USERNAME(username);
                     System.out.println("Success");
                     // Login successful, do something here
+                    db.addCheckingAccountFunds(1000);
                 } else {
                     // Login failed, do something here
                     System.out.println("Failure");
                 }
             }
         });
+
+
     }
 
 }
