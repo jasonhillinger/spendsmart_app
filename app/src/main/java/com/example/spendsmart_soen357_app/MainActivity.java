@@ -46,8 +46,25 @@ public class MainActivity extends AppCompatActivity {
                     db.setLOGGEDIN_USERNAME(username);
                     System.out.println("Success");
                     // Login successful, do something here
-                    db.addCheckingAccountFunds(1000);
-                    db.addSavingAccountFunds(2000);
+
+                    // Sample code on how to add funds to checkings account
+//                    db.addCheckingAccountFunds(1000);
+
+                    // Sample code on how to add funds to savings account
+//                    db.addSavingAccountFunds(2000);
+
+                    // Sample code on how to get checking account funds
+                    // done exactly the same way with saving account
+                    db.getCheckingAccountFunds(new Callback<String>() {
+                        @Override
+                        public void onCallback(String data) {
+                            // Do something with the data
+                            // Should change data in ui
+                            System.out.println(data);
+                        }
+                    });
+
+
                 } else {
                     // Login failed, do something here
                     System.out.println("Failure");

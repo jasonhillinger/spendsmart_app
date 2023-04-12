@@ -8,6 +8,7 @@ import com.google.firebase.database.*;
 public class DatabaseController {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static String LOGGEDIN_USERNAME = null;
+    private static String LOGGEDIN_CHECKING = null;
 
     public interface LoginCallback {
         void onLoginComplete(boolean success);
@@ -25,15 +26,56 @@ public class DatabaseController {
     // todo: to be implemented
     public void getTransactions(int amount){}
 
-    // todo: to be implemented
-    public String getSavingAccountFunds(){
-        return "";
+
+    public void getSavingAccountFunds(Callback<String> callback){
+        if (LOGGEDIN_USERNAME != null) {
+            DatabaseReference userRef = database.getReference("users").child(this.LOGGEDIN_USERNAME).child("saving_account");
+
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // Get the current value of the checking_account child node
+                    String funds = dataSnapshot.getValue(String.class);
+                    callback.onCallback(funds);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle the error
+                    callback.onCallback(null);
+                }
+            });
+        } else {
+            // Handle the case where LOGGEDIN_USERNAME is null
+            callback.onCallback("User not logged in");
+        }
     }
 
     // todo: to be implemented
-    public String getCheckingAccountFuncts(){
-        return "";
+    public void getCheckingAccountFunds(Callback<String> callback){
+        if (LOGGEDIN_USERNAME != null) {
+            DatabaseReference userRef = database.getReference("users").child(this.LOGGEDIN_USERNAME).child("checking_account");
+
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // Get the current value of the checking_account child node
+                    String funds = dataSnapshot.getValue(String.class);
+                    callback.onCallback(funds);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle the error
+                    callback.onCallback(null);
+                }
+            });
+        } else {
+            // Handle the case where LOGGEDIN_USERNAME is null
+            callback.onCallback("User not logged in");
+        }
     }
+
 
     // Adds (or subtracts if given a negative number) to the logged in username's checking account balance
     public void addCheckingAccountFunds(int amount){
