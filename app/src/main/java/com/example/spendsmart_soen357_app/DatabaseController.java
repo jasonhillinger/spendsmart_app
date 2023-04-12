@@ -51,8 +51,35 @@ public class DatabaseController {
         }
     }
 
+    // Adds (or subtracts if given a negative number) to the logged in username's checking account balance
+    public void addSavingAccountFunds(int amount){
+        if (LOGGEDIN_USERNAME != null) {
+            DatabaseReference userRef = database.getReference("users").child(this.LOGGEDIN_USERNAME).child("saving_account");
 
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // Get the current value of the checking_account child node
+                    int currentBalance = dataSnapshot.getValue(Integer.class);
 
+                    // Add the amount to the current balance
+                    int newBalance = currentBalance + amount;
+
+                    // Update the checking_account child node with the new balance
+                    userRef.setValue(newBalance);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Handle the error
+                }
+            });
+        } else {
+            // Handle the case where LOGGEDIN_USERNAME is null
+        }
+    }
+
+    // Android multithreading bs, used for login
     private class LoginTask extends AsyncTask<Void, Void, Boolean> {
         private final String username;
         private final String password;

@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("Success");
                     // Login successful, do something here
                     db.addCheckingAccountFunds(1000);
+                    db.addSavingAccountFunds(2000);
                 } else {
                     // Login failed, do something here
                     System.out.println("Failure");
