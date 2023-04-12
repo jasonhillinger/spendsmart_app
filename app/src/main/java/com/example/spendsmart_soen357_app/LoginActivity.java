@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
@@ -57,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
                             // Login failed, do something here
                             //TODO create toast message indicating that user login failed
                             System.out.println("Failure");
+                            Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
