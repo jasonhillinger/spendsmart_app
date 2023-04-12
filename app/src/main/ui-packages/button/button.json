@@ -1,0 +1,146 @@
+{
+  "name": "button",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "pQz6vcxuddSc5Cul30AT9h",
+    "node": "9:46",
+    "version": "3329073368",
+    "component-id": "c0d1b8ac5d41cadc7142a1141acdf515ca113df2"
+  },
+  "default": "Button=Primary",
+  "documentation": "Green Buttons\n",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "text",
+        "id": "Button"
+      }
+    ],
+    "modes": {
+      "Button=Primary": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "76.0",
+              "top": "12.0",
+              "right": "76.0",
+              "bottom": "12.0"
+            },
+            "border-radius": "24.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "arrangement": "row",
+            "children": [
+              "Button"
+            ],
+            "item-spacing": "10.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "75.40540540540539",
+              "saturation": "0.9288702928870293",
+              "value": "0.9372549019607843"
+            },
+            "clip-content": "false"
+          },
+          {
+            "id": "Button",
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Button",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "16.0",
+            "line-height": "1.5",
+            "typeface": "Gilroy-Bold"
+          }
+        ]
+      },
+      "Button=secondary": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "76.0",
+              "top": "12.0",
+              "right": "76.0",
+              "bottom": "12.0"
+            },
+            "border-radius": "24.0",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "stroke-width": "1.0",
+            "stroke-color": {
+              "alpha": "1.0",
+              "hue": "75.40540540540539",
+              "saturation": "0.9288702928870293",
+              "value": "0.9372549019607843"
+            },
+            "arrangement": "row",
+            "children": [
+              "Button"
+            ],
+            "item-spacing": "10.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "Button",
+            "color": {
+              "alpha": "1.0",
+              "hue": "75.40540540540539",
+              "saturation": "0.9288702928870293",
+              "value": "0.9372549019607843"
+            },
+            "text-content": "Button",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": "16.0",
+            "line-height": "1.5",
+            "typeface": "Gilroy-Bold"
+          }
+        ]
+      }
+    }
+  },
+  "previews": [
+    {
+      "design": "Button=Primary",
+      "size": {
+        "width": 202.0,
+        "height": 48.0
+      }
+    },
+    {
+      "design": "Button=secondary",
+      "size": {
+        "width": 202.0,
+        "height": 48.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

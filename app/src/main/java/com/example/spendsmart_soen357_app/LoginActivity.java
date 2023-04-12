@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +19,7 @@ import org.json.JSONArray;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+//    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,19 @@ public class LoginActivity extends AppCompatActivity {
 
         EditText username_textfield = (EditText) findViewById(R.id.username_textfield);
         EditText password_textfield = (EditText) findViewById(R.id.password_textfield);
-        Button loginButton = (Button) findViewById(R.id.login_button);
+        ImageButton loginButton = findViewById(R.id.loginButton);
+        ImageView imageView = findViewById(R.id.logo);
+        imageView.setImageResource(R.drawable.spendsmart_logo);
+
+        ImageView sloganView = findViewById(R.id.slogan);
+        sloganView.setImageResource(R.drawable.slogan);
+
+        ImageView welcome_message = findViewById(R.id.welcome_message);
+        welcome_message.setImageResource(R.drawable.welcome_message);
+//        loginButton.setStyle(R.style.BlueButton);
+
+//        Button loginButton = (Button) findViewById(R.id.login_button);
+//        loginButton.setBackgroundResource(R.drawable.button_blue);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

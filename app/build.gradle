@@ -1,11 +1,20 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+    id 'com.google.relay' version '0.3.02' // Relay
 }
 
 android {
     namespace 'com.example.spendsmart_soen357_app'
     compileSdk 33
+
+    sourceSets{
+        main{
+            assets{
+                srcDir('src/main/ui-packages')
+            }
+        }
+    }
 
     defaultConfig {
         applicationId "com.example.spendsmart_soen357_app"
@@ -46,4 +55,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.facebook.litho:litho-core:0.44.0'
+
 }
