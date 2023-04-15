@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_margin="15dp"
-                android:background="@drawable/bank_card_home_fragment">
+                android:background="@drawable/balance_card_home_fragment">
 
                 <TextView
                     android:id="@+id/tv_balance"
@@ -41,7 +41,7 @@
                     android:layout_marginTop="15dp"/>
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btn_month"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="160dp"
