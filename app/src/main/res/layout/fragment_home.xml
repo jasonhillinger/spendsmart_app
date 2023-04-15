@@ -17,8 +17,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:translationY="100dp">
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Good Morning, Jackey Weng"
+                android:fontFamily="@font/inter"
+                android:textColor="#8a8080"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="30dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome Back!"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="30sp"
+                android:layout_marginHorizontal="20dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -42,7 +59,7 @@
 
                 <Button
                     android:id="@+id/btn_month"
-                    android:layout_width="40dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="160dp"
                     android:layout_marginTop="10dp"
@@ -149,22 +166,19 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
-h
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Transaction"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="?attr/colorPrimary"
+                android:layout_margin="20dp"
+                android:textSize="20sp"/>
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
