@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="@id/tv_balance"
                     app:layout_constraintTop_toBottomOf="@id/tv_balance"
-                    android:text="$ 000.00"
+                    android:text="$ 140.00"
                     android:textColor="@color/white"
                     android:fontFamily="@font/inter"
                     android:textStyle="bold"
@@ -124,7 +124,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_expense"
                             android:fontFamily="@font/inter_semibold"
-                            android:text="$ 00.00"
+                            android:text="$ 30.00"
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             android:layout_marginStart="10dp"
@@ -158,7 +158,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_income"
                             android:fontFamily="@font/inter_semibold"
-                            android:text="$ 00.00"
+                            android:text="$ 40.00"
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             android:layout_marginStart="10dp"
@@ -178,6 +178,11 @@
                 android:textColor="?attr/colorPrimary"
                 android:layout_margin="20dp"
                 android:textSize="20sp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/view_transaction"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
 

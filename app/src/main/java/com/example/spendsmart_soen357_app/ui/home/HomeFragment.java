@@ -8,19 +8,32 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBindings;
 
+import com.example.spendsmart_soen357_app.Adapter.TransactionAdapter;
+import com.example.spendsmart_soen357_app.Model.Transaction;
 import com.example.spendsmart_soen357_app.R;
 import com.example.spendsmart_soen357_app.databinding.FragmentHomeBinding;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView rvTransactions;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +46,9 @@ public class HomeFragment extends Fragment {
         //final TextView textView = binding.textHome;
         //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
+        //Setup UI elements
+        setupUI(root);
+
         Button month = binding.btnMonth;
         month.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +57,58 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // Set transaction view
+        recyclerViewTransaction(getContext());
+
         return root;
+    }
+
+    private void setupUI(View v) {
+        rvTransactions = v.findViewById(R.id.view_transaction);
+    }
+
+    private void recyclerViewTransaction(Context context) {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+
+        Date date1 = null;
+        Date date2 = null;
+        Date time1 = null;
+        Date time2 = null;
+
+        try{
+            // Formatting the date and time
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            date1 = dateFormat.parse("2023-04-20");
+            date2 = dateFormat.parse("2023-04-15");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+            time1 = timeFormat.parse("04:20");
+            time2 = timeFormat.parse("06:20");
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        transactions.add(new Transaction("Checking Account",140.00,"Food and groceries","Tim Hortons",
+                "Purchase",date1,time1, "Jackey"));
+
+        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Spotify Premium",
+                "Purchase",date2,time2, "Jackey"));
+
+        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Transfer",
+                "Income",date2,time2, "Jackey"));
+
+        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Transfer",
+                "Income",date2,time2, "Jackey"));
+
+        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Transfer",
+                "Income",date2,time2, "Jackey"));
+
+
+        adapter = new TransactionAdapter(getActivity(), transactions);
+        rvTransactions.setAdapter(adapter);
+        rvTransactions.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+
     }
 
     private void showMenu(Context context, View v, int balance_menu) {
