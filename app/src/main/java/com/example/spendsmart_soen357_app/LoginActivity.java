@@ -58,28 +58,27 @@ public class LoginActivity extends AppCompatActivity {
                 String username = username_textfield.getText().toString();
                 String password = password_textfield.getText().toString();
                 System.out.println("button clicked");
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-//                TODO:  Uncomment later. DELETE INTENT
-//                db.login(username, password, new Callback<Boolean>() {
-//                    @Override
-//                    public void onCallback(Boolean success) {
-//                        if (success) {
-//                            db.setLOGGEDIN_USERNAME(username);
-//                            System.out.println("Success");
-//
-//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                            startActivity(intent);
-//
-//                        } else {
-//                            // Login failed, do something here
-//                            //TODO create toast message indicating that user login failed
-//                            System.out.println("Failure");
-//                            Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
-//
-//                        }
-//                    }
-//                });
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(intent);
+                db.login(username, password, new Callback<Boolean>() {
+                    @Override
+                    public void onCallback(Boolean success) {
+                        if (success) {
+                            db.setLOGGEDIN_USERNAME(username);
+                            System.out.println("Success");
+
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+
+                        } else {
+                            // Login failed, do something here
+                            //TODO create toast message indicating that user login failed
+                            System.out.println("Failure");
+                            Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
             }
         });
 
