@@ -27,6 +27,10 @@ public class DatabaseController {
         LOGGEDIN_USERNAME = LOGGEDIN_USER;
     }
 
+    public static String getLOGGEDIN_USER(){
+        return  LOGGEDIN_USERNAME;
+    }
+
     public void login(String username, String password, Callback<Boolean> callback) {
         new LoginTask(username, password,  callback).execute();
     }

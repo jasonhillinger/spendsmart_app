@@ -21,6 +21,9 @@ public class LoginActivity extends AppCompatActivity {
 
 //    private ActivityMainBinding binding;
 
+    // Set to true if you want to skip login for debugging purposes
+    private boolean DEBUG_MODE = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,27 +63,33 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println("button clicked");
 
 //                TODO: Comment intent and uncomment db
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-//                db.login(username, password, new Callback<Boolean>() {
-//                    @Override
-//                    public void onCallback(Boolean success) {
-//                        if (success) {
-//                            db.setLOGGEDIN_USERNAME(username);
-//                            System.out.println("Success");
-//
-//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                            startActivity(intent);
-//
-//                        } else {
-//                            // Login failed, do something here
-//                            //TODO create toast message indicating that user login failed
-//                            System.out.println("Failure");
-//                            Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
-//
-//                        }
-//                    }
-//                });
+                if(DEBUG_MODE){
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    db.login(username, password, new Callback<Boolean>() {
+                        @Override
+                        public void onCallback(Boolean success) {
+                            if (success) {
+                                db.setLOGGEDIN_USERNAME(username);
+                                System.out.println("Success");
+
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+
+                            } else {
+                                // Login failed, do something here
+                                //TODO create toast message indicating that user login failed
+                                System.out.println("Failure");
+                                Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
+                }
+
+
             }
         });
 

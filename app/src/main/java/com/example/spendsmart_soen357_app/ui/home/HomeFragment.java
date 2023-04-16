@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,9 +22,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBindings;
 
 import com.example.spendsmart_soen357_app.Adapter.TransactionAdapter;
+import com.example.spendsmart_soen357_app.Callback;
+import com.example.spendsmart_soen357_app.DatabaseController;
 import com.example.spendsmart_soen357_app.Model.Transaction;
 import com.example.spendsmart_soen357_app.R;
 import com.example.spendsmart_soen357_app.databinding.FragmentHomeBinding;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,19 +51,105 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        DatabaseController db = new DatabaseController();
+
         //final TextView textView = binding.textHome;
         //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // Setting good morning message for user
+        TextView welcome_message = root.findViewById(R.id.welcome_message);
+        welcome_message.setText("Good Morning, " + db.getLOGGEDIN_USER() + "!");
+
+//        tv_balance_value
+
+        // Setting the checking account balance for the user
+        TextView balance = root.findViewById(R.id.tv_balance_value);
+        db.getCheckingAccountFunds(new Callback<String>() {
+            @Override
+            public void onCallback(String data) {
+                // Do something with the data
+                balance.setText("$ "+data);
+//                System.out.println(data);
+            }
+        });
+
+        TextView expenses_view = root.findViewById(R.id.tv_expense_value);
+        TextView income_view = root.findViewById(R.id.tv_income_value);
+        String date_time_radio = "this_month";
+        // Getting the transactions for expenses and income based on radio button selection
+        db.getTransactions(new Callback<JSONArray>() {
+            @Override
+            public void onCallback(JSONArray data) {
+                double expenses = 0;
+                double income = 0;
+                for (int i = 0; i < data.length(); i++) {
+                    try {
+                        JSONObject obj = data.getJSONObject(i);
+                        String category = obj.getString("category");
+                        if (category.equals("income")){
+                            income += Double.parseDouble(obj.getString("amount"));
+                        }
+                        else{
+                            expenses += Double.parseDouble(obj.getString("amount"));
+                        }
+                        System.out.println("TEST");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+                System.out.println(income);
+                String income_str = String.format("%.2f",income);
+                income_view.setText("$ " + income_str);
+                String expenses_str = String.format("%.2f",expenses);
+                expenses_view.setText("$ " + expenses_str);
+            }
+        });
+
 
         //Setup UI elements
         setupUI(root);
 
         Button month = binding.btnMonth;
+        final int lastSelectedId = R.id.this_month;
         month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showMenu(getContext(),view, R.menu.balance_menu);
+                PopupMenu popup = new PopupMenu(getContext(), view);
+                popup.inflate(R.menu.balance_menu);
+
+                // set the last selected radio button to be checked by default
+                MenuItem lastSelectedMenuItem = popup.getMenu().findItem(lastSelectedId);
+                lastSelectedMenuItem.setChecked(true);
+                RadioButton radioButton = lastSelectedMenuItem.getActionView().findViewById(R.id.radio_button_id);
+                if (radioButton != null) {
+                    radioButton.setChecked(true);
+                }
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.this_month:
+                                item.setChecked(true);
+                                return true;
+                            case R.id.past_3_month:
+                                item.setChecked(true);
+                                return true;
+                            case R.id.past_6_month:
+                                item.setChecked(true);
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popup.show();
             }
         });
+
+
 
         // Set transaction view
         recyclerViewTransaction(getContext());
