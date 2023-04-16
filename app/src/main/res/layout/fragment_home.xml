@@ -26,7 +26,7 @@
                 android:fontFamily="@font/inter"
                 android:textColor="#8a8080"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="45dp"/>
+                android:layout_marginTop="50dp"/>
 
             <TextView
                 android:layout_width="match_parent"
