@@ -55,49 +55,49 @@ public class MainActivity extends AppCompatActivity {
         DatabaseController db = new DatabaseController();
 
         // Call the login function with the desired username and password
-        String username = "Jackey";
-        String password = "123";
-        db.login(username, password, new Callback<Boolean>() {
-            @Override
-            public void onCallback(Boolean success) {
-                if (success) {
-                    db.setLOGGEDIN_USERNAME(username);
-                    System.out.println("Success");
-                    // Login successful, do something here
-
-                    // Sample code on how to add funds to checkings account
-//                    db.addCheckingAccountFunds(1000);
-
-                    // Sample code on how to add funds to savings account
-//                    db.addSavingAccountFunds(2000);
-
-                    // Sample code on how to get checking account funds
-                    // done exactly the same way with saving account
-                    db.getCheckingAccountFunds(new Callback<String>() {
-                        @Override
-                        public void onCallback(String data) {
-                            // Do something with the data
-                            // Should change data in ui
-                            System.out.println(data);
-                        }
-                    });
-
-                    //Sample code to get transactions for user
-                    db.getTransactions(new Callback<JSONArray>() {
-                        @Override
-                        public void onCallback(JSONArray data) {
-                            System.out.println(data);
-                        }
-                    });
-
-
-
-                } else {
-                    // Login failed, do something here
-                    System.out.println("Failure");
-                }
-            }
-        });
+//        String username = "Jackey";
+//        String password = "123";
+//        db.login(username, password, new Callback<Boolean>() {
+//            @Override
+//            public void onCallback(Boolean success) {
+//                if (success) {
+//                    db.setLOGGEDIN_USERNAME(username);
+//                    System.out.println("Success");
+//                    // Login successful, do something here
+//
+//                    // Sample code on how to add funds to checkings account
+////                    db.addCheckingAccountFunds(1000);
+//
+//                    // Sample code on how to add funds to savings account
+////                    db.addSavingAccountFunds(2000);
+//
+//                    // Sample code on how to get checking account funds
+//                    // done exactly the same way with saving account
+//                    db.getCheckingAccountFunds(new Callback<String>() {
+//                        @Override
+//                        public void onCallback(String data) {
+//                            // Do something with the data
+//                            // Should change data in ui
+//                            System.out.println(data);
+//                        }
+//                    });
+//
+//                    //Sample code to get transactions for user
+//                    db.getTransactions(new Callback<JSONArray>() {
+//                        @Override
+//                        public void onCallback(JSONArray data) {
+//                            System.out.println(data);
+//                        }
+//                    });
+//
+//
+//
+//                } else {
+//                    // Login failed, do something here
+//                    System.out.println("Failure");
+//                }
+//            }
+//        });
 
 
         // Handle overlap when app has handle bars

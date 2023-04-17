@@ -34,7 +34,11 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class HomeFragment extends Fragment {
@@ -43,38 +47,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView rvTransactions;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        DatabaseController db = new DatabaseController();
-
-        //final TextView textView = binding.textHome;
-        //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
-        // Setting good morning message for user
-        TextView welcome_message = root.findViewById(R.id.welcome_message);
-        welcome_message.setText("Good Morning, " + db.getLOGGEDIN_USER() + "!");
-
-//        tv_balance_value
-
-        // Setting the checking account balance for the user
-        TextView balance = root.findViewById(R.id.tv_balance_value);
-        db.getCheckingAccountFunds(new Callback<String>() {
-            @Override
-            public void onCallback(String data) {
-                // Do something with the data
-                balance.setText("$ "+data);
-//                System.out.println(data);
-            }
-        });
-
-        TextView expenses_view = root.findViewById(R.id.tv_expense_value);
-        TextView income_view = root.findViewById(R.id.tv_income_value);
+    public void setExpenseIncome(TextView expenses_view,TextView income_view,DatabaseController db, int currentMonth, int radioButtonVal){
         String date_time_radio = "this_month";
         // Getting the transactions for expenses and income based on radio button selection
         db.getTransactions(new Callback<JSONArray>() {
@@ -86,12 +59,49 @@ public class HomeFragment extends Fragment {
                     try {
                         JSONObject obj = data.getJSONObject(i);
                         String category = obj.getString("category");
-                        if (category.equals("income")){
-                            income += Double.parseDouble(obj.getString("amount"));
+                        String dateStr = obj.getString("date");
+                        LocalDate date = LocalDate.parse(dateStr);
+                        int month = date.getMonthValue();
+                        if(radioButtonVal == R.id.this_month && month == currentMonth){
+                            if (category.equals("income")){
+                                income += Double.parseDouble(obj.getString("amount"));
+                            }
+                            else{
+                                expenses += Double.parseDouble(obj.getString("amount"));
+                            }
                         }
-                        else{
-                            expenses += Double.parseDouble(obj.getString("amount"));
+
+                        boolean monthCheckPast3Month = (month == currentMonth )|| (month == currentMonth -1 ) || (month == currentMonth -2 );
+                        if(radioButtonVal == R.id.past_3_month && monthCheckPast3Month){
+                            if (category.equals("income")){
+                                income += Double.parseDouble(obj.getString("amount"));
+                            }
+                            else{
+                                expenses += Double.parseDouble(obj.getString("amount"));
+                            }
                         }
+
+                        boolean monthCheckPast6Month = (month == currentMonth )|| (month == currentMonth -1 ) || (month == currentMonth -2 )  || (month == currentMonth -3 )  || (month == currentMonth -4 ) || (month == currentMonth -5 );
+                        if(radioButtonVal == R.id.past_6_month && monthCheckPast6Month){
+                            if (category.equals("income")){
+                                income += Double.parseDouble(obj.getString("amount"));
+                            }
+                            else{
+                                expenses += Double.parseDouble(obj.getString("amount"));
+                            }
+                        }
+
+                        boolean monthCheckPastYear =  (month == currentMonth )|| (month == currentMonth -1 ) || (month == currentMonth -2 )  || (month == currentMonth -3 )  || (month == currentMonth -4 ) || (month == currentMonth -5 ) || (month == currentMonth -6 )|| (month == currentMonth -7 ) || (month == currentMonth -8 )  || (month == currentMonth -9 )  || (month == currentMonth -10 ) || (month == currentMonth -11 );
+                        if(radioButtonVal == R.id.past_3_month && monthCheckPastYear){
+                            if (category.equals("income")){
+                                income += Double.parseDouble(obj.getString("amount"));
+                            }
+                            else{
+                                expenses += Double.parseDouble(obj.getString("amount"));
+                            }
+                        }
+
+
                         System.out.println("TEST");
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -106,26 +116,58 @@ public class HomeFragment extends Fragment {
                 expenses_view.setText("$ " + expenses_str);
             }
         });
+    }
 
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        HomeViewModel homeViewModel =
+                new ViewModelProvider(this).get(HomeViewModel.class);
+
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        Calendar calendar = Calendar.getInstance();
+        int currentMonth = calendar.get(Calendar.MONTH) + 1;
+
+        DatabaseController db = new DatabaseController();
+
+        //final TextView textView = binding.textHome;
+        //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // Setting good morning message for user
+        TextView welcome_message = root.findViewById(R.id.welcome_message);
+        welcome_message.setText("Good Morning, " + db.getLOGGEDIN_USER() + "!");
+
+
+
+        // Setting the checking account balance for the user
+        TextView balance = root.findViewById(R.id.tv_balance_value);
+        db.getCheckingAccountFunds(new Callback<String>() {
+            @Override
+            public void onCallback(String data) {
+                // Do something with the data
+                balance.setText("$ "+data);
+//                System.out.println(data);
+            }
+        });
+
+        TextView expenses_view = root.findViewById(R.id.tv_expense_value);
+        TextView income_view = root.findViewById(R.id.tv_income_value);
+
+        setExpenseIncome(expenses_view,income_view,db,currentMonth, R.id.this_month);
 
         //Setup UI elements
         setupUI(root);
 
         Button month = binding.btnMonth;
-        final int lastSelectedId = R.id.this_month;
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        final int[] lastSelectedId = {sharedPref.getInt("lastSelectedId", R.id.this_month)};
+
         month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PopupMenu popup = new PopupMenu(getContext(), view);
                 popup.inflate(R.menu.balance_menu);
-
-                // set the last selected radio button to be checked by default
-                MenuItem lastSelectedMenuItem = popup.getMenu().findItem(lastSelectedId);
-                lastSelectedMenuItem.setChecked(true);
-                RadioButton radioButton = lastSelectedMenuItem.getActionView().findViewById(R.id.radio_button_id);
-                if (radioButton != null) {
-                    radioButton.setChecked(true);
-                }
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -133,21 +175,63 @@ public class HomeFragment extends Fragment {
                         switch (item.getItemId()) {
                             case R.id.this_month:
                                 item.setChecked(true);
-                                return true;
+                                lastSelectedId[0] = R.id.this_month;
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putInt("lastSelectedId", R.id.this_month);
+                                editor.apply();
+
+                                setExpenseIncome(expenses_view,income_view,db,currentMonth,R.id.this_month);
+
+
+                                break;
                             case R.id.past_3_month:
                                 item.setChecked(true);
-                                return true;
+                                lastSelectedId[0] = R.id.past_3_month;
+                                SharedPreferences.Editor editor1 = sharedPref.edit();
+                                editor1.putInt("lastSelectedId", R.id.past_3_month);
+                                editor1.apply();
+
+                                // Add onClickListener for this case
+                                setExpenseIncome(expenses_view,income_view,db,currentMonth,R.id.past_3_month);
+
+                                break;
                             case R.id.past_6_month:
                                 item.setChecked(true);
-                                return true;
+                                lastSelectedId[0] = R.id.past_6_month;
+                                SharedPreferences.Editor editor2 = sharedPref.edit();
+                                editor2.putInt("lastSelectedId", R.id.past_6_month);
+                                editor2.apply();
+
+                                setExpenseIncome(expenses_view,income_view,db,currentMonth,R.id.past_6_month);
+
+                                break;
+                            case R.id.past_year:
+                                item.setChecked(true);
+                                lastSelectedId[0] = R.id.past_year;
+                                SharedPreferences.Editor editor3 = sharedPref.edit();
+                                editor3.putInt("lastSelectedId", R.id.past_year);
+                                editor3.apply();
+                                setExpenseIncome(expenses_view,income_view,db,currentMonth,R.id.past_year);
+
+                                break;
                             default:
                                 return false;
                         }
+
+                        return true;
                     }
                 });
+
+                // Set the default checked radio button before showing the popup
+                MenuItem lastSelectedMenuItem = popup.getMenu().findItem(lastSelectedId[0]);
+                lastSelectedMenuItem.setChecked(true);
+
                 popup.show();
             }
         });
+
+
+
 
 
 
