@@ -46,9 +46,14 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private RecyclerView.Adapter adapter;
     private RecyclerView rvTransactions;
+    Calendar calendar = Calendar.getInstance();
+    int currentMonth = calendar.get(Calendar.MONTH) + 1;
+    int currentYear = calendar.get(Calendar.YEAR);
+
 
     public void setExpenseIncome(TextView expenses_view,TextView income_view,DatabaseController db, int currentMonth, int radioButtonVal){
         String date_time_radio = "this_month";
+        ArrayList<Transaction> trans = new ArrayList<Transaction>();
         // Getting the transactions for expenses and income based on radio button selection
         db.getTransactions(new Callback<JSONArray>() {
             @Override
@@ -60,8 +65,14 @@ public class HomeFragment extends Fragment {
                         JSONObject obj = data.getJSONObject(i);
                         String category = obj.getString("category");
                         String dateStr = obj.getString("date");
+                        String accountName = obj.getString("account");
+                        String nameOfSubject = obj.getString("subject");
+                        String type = obj.getString("type");
+                        String time = obj.getString("time");
                         LocalDate date = LocalDate.parse(dateStr);
+
                         int month = date.getMonthValue();
+                        int year = date.getYear();
                         if(radioButtonVal == R.id.this_month && month == currentMonth){
                             if (category.equals("income")){
                                 income += Double.parseDouble(obj.getString("amount"));
@@ -69,9 +80,15 @@ public class HomeFragment extends Fragment {
                             else{
                                 expenses += Double.parseDouble(obj.getString("amount"));
                             }
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date1 = dateFormat.parse(dateStr);
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            Date time1 = timeFormat.parse(time);
+                            trans.add(new Transaction(accountName,Double.parseDouble(obj.getString("amount")
+                            ), category, nameOfSubject, type, date1, time1, ""));
                         }
 
-                        boolean monthCheckPast3Month = (month == currentMonth )|| (month == currentMonth -1 ) || (month == currentMonth -2 );
+                        boolean monthCheckPast3Month = ( (month == currentMonth )|| (month == currentMonth -1 ) || (month == currentMonth -2 ) ) && (year == currentYear);
                         if(radioButtonVal == R.id.past_3_month && monthCheckPast3Month){
                             if (category.equals("income")){
                                 income += Double.parseDouble(obj.getString("amount"));
@@ -79,9 +96,15 @@ public class HomeFragment extends Fragment {
                             else{
                                 expenses += Double.parseDouble(obj.getString("amount"));
                             }
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date1 = dateFormat.parse(dateStr);
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            Date time1 = timeFormat.parse(time);
+                            trans.add(new Transaction(accountName,Double.parseDouble(obj.getString("amount")
+                            ), category, nameOfSubject, type, date1, time1, ""));
                         }
 
-                        boolean monthCheckPast6Month = (month == currentMonth )|| (month == currentMonth -1 ) || (month == currentMonth -2 )  || (month == currentMonth -3 )  || (month == currentMonth -4 ) || (month == currentMonth -5 );
+                        boolean monthCheckPast6Month = ( (month == currentMonth ) || (month == currentMonth -1 ) || (month == currentMonth -2 )  || (month == currentMonth -3 )  || (month == currentMonth -4 ) || (month == currentMonth -5 ) ) && (year == currentYear);
                         if(radioButtonVal == R.id.past_6_month && monthCheckPast6Month){
                             if (category.equals("income")){
                                 income += Double.parseDouble(obj.getString("amount"));
@@ -89,21 +112,35 @@ public class HomeFragment extends Fragment {
                             else{
                                 expenses += Double.parseDouble(obj.getString("amount"));
                             }
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date1 = dateFormat.parse(dateStr);
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            Date time1 = timeFormat.parse(time);
+                            trans.add(new Transaction(accountName,Double.parseDouble(obj.getString("amount")
+                            ), category, nameOfSubject, type, date1, time1, ""));
                         }
 
-                        boolean monthCheckPastYear =  (month == currentMonth )|| (month == currentMonth -1 ) || (month == currentMonth -2 )  || (month == currentMonth -3 )  || (month == currentMonth -4 ) || (month == currentMonth -5 ) || (month == currentMonth -6 )|| (month == currentMonth -7 ) || (month == currentMonth -8 )  || (month == currentMonth -9 )  || (month == currentMonth -10 ) || (month == currentMonth -11 );
-                        if(radioButtonVal == R.id.past_3_month && monthCheckPastYear){
+                        boolean monthCheckPastYear = ( (month == currentMonth )|| (month == currentMonth -1 ) || (month == currentMonth -2 )  || (month == currentMonth -3 )  || (month == currentMonth -4 ) || (month == currentMonth -5 ) || (month == currentMonth -6 )|| (month == currentMonth -7 ) || (month == currentMonth -8 )  || (month == currentMonth -9 )  || (month == currentMonth -10 ) || (month == currentMonth -11 ) ) && ( (year == currentYear - 1) || (year == currentYear));
+                        if(radioButtonVal == R.id.past_year && monthCheckPastYear){
                             if (category.equals("income")){
                                 income += Double.parseDouble(obj.getString("amount"));
                             }
                             else{
                                 expenses += Double.parseDouble(obj.getString("amount"));
                             }
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date1 = dateFormat.parse(dateStr);
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            Date time1 = timeFormat.parse(time);
+                            trans.add(new Transaction(accountName,Double.parseDouble(obj.getString("amount")
+                            ), category, nameOfSubject, type, date1, time1, ""));
                         }
 
 
                         System.out.println("TEST");
                     } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
 
@@ -114,6 +151,8 @@ public class HomeFragment extends Fragment {
                 income_view.setText("$ " + income_str);
                 String expenses_str = String.format("%.2f",expenses);
                 expenses_view.setText("$ " + expenses_str);
+                // Set transaction view
+                recyclerViewTransaction(getContext(),trans);
             }
         });
     }
@@ -126,8 +165,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Calendar calendar = Calendar.getInstance();
-        int currentMonth = calendar.get(Calendar.MONTH) + 1;
+
 
         DatabaseController db = new DatabaseController();
 
@@ -235,8 +273,6 @@ public class HomeFragment extends Fragment {
 
 
 
-        // Set transaction view
-        recyclerViewTransaction(getContext());
 
         return root;
     }
@@ -245,42 +281,8 @@ public class HomeFragment extends Fragment {
         rvTransactions = v.findViewById(R.id.view_transaction);
     }
 
-    private void recyclerViewTransaction(Context context) {
-        ArrayList<Transaction> transactions = new ArrayList<>();
-
-        Date date1 = null;
-        Date date2 = null;
-        Date time1 = null;
-        Date time2 = null;
-
-        try{
-            // Formatting the date and time
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            date1 = dateFormat.parse("2023-04-20");
-            date2 = dateFormat.parse("2023-04-15");
-            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-            time1 = timeFormat.parse("04:20");
-            time2 = timeFormat.parse("06:20");
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        transactions.add(new Transaction("Checking Account",140.00,"Food and groceries","Tim Hortons",
-                "Purchase",date1,time1, "Jackey"));
-
-        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Spotify Premium",
-                "Purchase",date2,time2, "Jackey"));
-
-        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Transfer",
-                "Income",date2,time2, "Jackey"));
-
-        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Transfer",
-                "Income",date2,time2, "Jackey"));
-
-        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Transfer",
-                "Income",date2,time2, "Jackey"));
+    private void recyclerViewTransaction(Context context, ArrayList<Transaction> trans) {
+        ArrayList<Transaction> transactions = trans;
 
 
         adapter = new TransactionAdapter(getActivity(), transactions);
@@ -307,6 +309,9 @@ public class HomeFragment extends Fragment {
             popup.getMenu().findItem(R.id.past_6_month).setChecked(sixMonthSelected);
         } else if (yearSelected) {
             popup.getMenu().findItem(R.id.past_year).setChecked(yearSelected);
+        }
+        else{
+            popup.getMenu().findItem(R.id.this_month).setChecked(true);
         }
 
 
