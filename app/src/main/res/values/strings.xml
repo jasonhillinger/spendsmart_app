@@ -39,4 +39,10 @@
     <string name="savingBalance">Saving Balance</string>
     <string name="checkingBalance">Checking Balance</string>
 
+
+    <string name="aboutText1">Spend Smart is a mobile application that will enable users to build better spending habits, track their spending, and provide suggestions to better manage their finances. Allowing the users to make better decisions on spending when they view their daily, weekly and monthly charts</string>
+    <string name="aboutText2">Spending money is easy but not everyone can track their finances. This app will help people with bad spending habits, provide reminders of when bills are due and set goals for monthly spending. This will be done by providing analytical metrics for the users to know how well they saved or overspent during the time period. </string>
+
+
+
 </resources>
