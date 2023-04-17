@@ -33,6 +33,10 @@
     <string name="october">October</string>
     <string name="november">November</string>
     <string name="december">December</string>
+
+
     <string name="title_wallet">Wallet</string>
+    <string name="savingBalance">Saving Balance</string>
+    <string name="checkingBalance">Checking Balance</string>
 
 </resources>

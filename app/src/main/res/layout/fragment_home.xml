@@ -1,50 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".ui.home.HomeFragment">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment">
 
-  <ScrollView android:layout_width="match_parent" android:layout_height="match_parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-      <TextView android:id="@+id/welcome_message" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginHorizontal="20dp" android:layout_marginTop="45dp" android:fontFamily="@font/inter" android:text="Good Morning, Jackey Weng" android:textColor="#8a8080" />
-      android:layout_marginTop="50dp"/>
+            <TextView
+                android:id="@+id/welcome_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Good Morning, Jackey Weng"
+                android:fontFamily="@font/inter"
+                android:textColor="#8a8080"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="50dp"/>
 
-      <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Welcome Back!" android:fontFamily="@font/inter_bold" android:textColor="?attr/colorPrimary" android:textSize="30sp" android:layout_marginHorizontal="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome Back!"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="30sp"
+                android:layout_marginHorizontal="20dp"/>
 
-      <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="250dp" android:layout_margin="15dp" android:background="@drawable/balance_card_home_fragment">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/wallet_balance_card"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/balance_card_home_fragment">
 
-        <TextView android:id="@+id/tv_balance" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" android:fontFamily="@font/inter" android:textStyle="bold" android:text="Checking Balance" android:textColor="@color/white" android:textSize="23sp" android:layout_marginStart="30dp" android:layout_marginTop="15dp" />
+                <TextView
+                    android:id="@+id/tv_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/inter"
+                    android:textStyle="bold"
+                    android:text="Checking Balance"
+                    android:textColor="@color/white"
+                    android:textSize="23sp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="15dp"/>
 
-        <Button android:id="@+id/btn_month" android:layout_width="50dp" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:layout_marginEnd="10dp" app:backgroundTint="?attr/colorSecondary" android:fontFamily="@font/inter" android:text="⋮" android:textSize="25sp" android:textStyle="bold" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/btn_month"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:backgroundTint="?attr/colorSecondary"
+                    android:fontFamily="@font/inter"
+                    android:text="⋮"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
-        <TextView android:id="@+id/tv_balance_value" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="@id/tv_balance" app:layout_constraintTop_toBottomOf="@id/tv_balance" android:text="$ 140.00" android:textColor="@color/white" android:fontFamily="@font/inter" android:textStyle="bold" android:textSize="40sp" android:layout_marginTop="15dp" />
+                <TextView
+                    android:id="@+id/tv_balance_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/tv_balance"
+                    app:layout_constraintTop_toBottomOf="@id/tv_balance"
+                    android:text="$ 140.00"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/inter"
+                    android:textStyle="bold"
+                    android:textSize="40sp"
+                    android:layout_marginTop="15dp"/>
 
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" android:paddingBottom="20dp" android:paddingStart="30dp" android:paddingEnd="30dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:paddingBottom="20dp"
+                    android:paddingStart="30dp"
+                    android:paddingEnd="30dp">
 
 
-          <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="5dp" android:background="@drawable/income_expense_home_fragment">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/income_expense_home_fragment">
 
-            <TextView android:id="@+id/tv_expense" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" android:fontFamily="@font/inter" android:text="Expense" android:textColor="@color/white" android:textSize="15sp" android:layout_marginStart="10dp" android:layout_marginTop="10dp" />
+                        <TextView
+                            android:id="@+id/tv_expense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:fontFamily="@font/inter"
+                            android:text="Expense"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"/>
 
-            <TextView android:id="@+id/tv_expense_value" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/tv_expense" android:fontFamily="@font/inter_semibold" android:text="$ 30.00" android:textColor="@color/white" android:textSize="20sp" android:layout_marginStart="10dp" android:layout_marginTop="5dp" />
+                        <TextView
+                            android:id="@+id/tv_expense_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_expense"
+                            android:fontFamily="@font/inter_semibold"
+                            android:text="$ 30.00"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"/>
 
-          </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-          <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="0dp" android:layout_height="80dp" android:layout_weight="1" android:background="@drawable/income_expense_home_fragment">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/income_expense_home_fragment">
 
-            <TextView android:id="@+id/tv_income" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" android:fontFamily="@font/inter" android:text="Income" android:textColor="@color/white" android:textSize="15sp" android:layout_marginStart="10dp" android:layout_marginTop="10dp" />
+                        <TextView
+                            android:id="@+id/tv_income"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:fontFamily="@font/inter"
+                            android:text="Income"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"/>
 
-            <TextView android:id="@+id/tv_income_value" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/tv_income" android:fontFamily="@font/inter_semibold" android:text="$ 40.00" android:textColor="@color/white" android:textSize="20sp" android:layout_marginStart="10dp" android:layout_marginTop="5dp" />
+                        <TextView
+                            android:id="@+id/tv_income_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_income"
+                            android:fontFamily="@font/inter_semibold"
+                            android:text="$ 40.00"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"/>
 
-          </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Transaction"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/view_transaction"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="60dp"/>
         </LinearLayout>
-
-
-      </androidx.constraintlayout.widget.ConstraintLayout>
-
-      <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Transaction" android:fontFamily="@font/inter_semibold" android:textColor="?attr/colorPrimary" android:layout_margin="20dp" android:textSize="20sp" />
-
-      <androidx.recyclerview.widget.RecyclerView android:id="@+id/view_transaction" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_marginBottom="60dp" />
-    </LinearLayout>
-  </ScrollView>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
