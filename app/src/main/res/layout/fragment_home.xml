@@ -38,6 +38,7 @@
                 android:layout_marginHorizontal="20dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/wallet_balance_card"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_margin="15dp"
@@ -176,7 +177,8 @@
                 android:text="Transaction"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="?attr/colorPrimary"
-                android:layout_margin="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
                 android:textSize="20sp"/>
 
             <androidx.recyclerview.widget.RecyclerView

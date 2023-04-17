@@ -13,6 +13,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -54,6 +55,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 showMenu(getContext(),view, R.menu.balance_menu);
+            }
+        });
+
+        ConstraintLayout walletBalanceCard = binding.walletBalanceCard;
+        walletBalanceCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "You clicked the balance card!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -129,6 +138,8 @@ public class HomeFragment extends Fragment {
             popup.getMenu().findItem(R.id.past_6_month).setChecked(sixMonthSelected);
         } else if (yearSelected) {
             popup.getMenu().findItem(R.id.past_year).setChecked(yearSelected);
+        }else{
+            popup.getMenu().findItem(R.id.this_month).setChecked(true);
         }
 
 
