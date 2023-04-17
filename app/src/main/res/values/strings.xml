@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Spendsmart_soen357_app</string>
+    <string name="app_name">SPEND SMART</string>
     <string name="title_home">Home</string>
     <string name="title_budget">Budget</string>
     <string name="title_analytics">Analytics</string>
@@ -12,10 +12,31 @@
     <string name="signature_title">Your signature</string>
     <string name="reply_title">Default reply action</string>
 
+    <!-- local preference   -->
+    <string name="balance_menu">balance menu</string>
+
     <!-- Sync Preferences -->
     <string name="sync_title">Sync email periodically</string>
     <string name="attachment_title">Download incoming attachments</string>
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+
+
+    <string name="title_wallet">Wallet</string>
+    <string name="savingBalance">Saving Balance</string>
+    <string name="checkingBalance">Checking Balance</string>
+
 </resources>

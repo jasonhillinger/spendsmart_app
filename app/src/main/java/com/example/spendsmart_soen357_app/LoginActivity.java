@@ -37,15 +37,16 @@ public class LoginActivity extends AppCompatActivity {
 
         EditText username_textfield = (EditText) findViewById(R.id.username_textfield);
         EditText password_textfield = (EditText) findViewById(R.id.password_textfield);
-        ImageButton loginButton = findViewById(R.id.loginButton);
-        ImageView imageView = findViewById(R.id.logo);
-        imageView.setImageResource(R.drawable.spendsmart_logo);
+        Button loginButton = findViewById(R.id.loginButton);
 
-        ImageView sloganView = findViewById(R.id.slogan);
-        sloganView.setImageResource(R.drawable.slogan);
-
-        ImageView welcome_message = findViewById(R.id.welcome_message);
-        welcome_message.setImageResource(R.drawable.welcome_message);
+//        ImageView imageView = findViewById(R.id.logo);
+//        imageView.setImageResource(R.drawable.spendsmart_logo);
+//
+//        ImageView sloganView = findViewById(R.id.slogan);
+//        sloganView.setImageResource(R.drawable.slogan);
+//
+//        ImageView welcome_message = findViewById(R.id.welcome_message);
+//        welcome_message.setImageResource(R.drawable.welcome_message);
 //        loginButton.setStyle(R.style.BlueButton);
 
 //        Button loginButton = (Button) findViewById(R.id.login_button);
@@ -57,26 +58,30 @@ public class LoginActivity extends AppCompatActivity {
                 // Code to be executed when the button is clicked
                 String username = username_textfield.getText().toString();
                 String password = password_textfield.getText().toString();
+                System.out.println("button clicked");
 
-                db.login(username, password, new Callback<Boolean>() {
-                    @Override
-                    public void onCallback(Boolean success) {
-                        if (success) {
-                            db.setLOGGEDIN_USERNAME(username);
-                            System.out.println("Success");
-
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-
-                        } else {
-                            // Login failed, do something here
-                            //TODO create toast message indicating that user login failed
-                            System.out.println("Failure");
-                            Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
+//                TODO: Comment intent and uncomment db
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+//                db.login(username, password, new Callback<Boolean>() {
+//                    @Override
+//                    public void onCallback(Boolean success) {
+//                        if (success) {
+//                            db.setLOGGEDIN_USERNAME(username);
+//                            System.out.println("Success");
+//
+//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                            startActivity(intent);
+//
+//                        } else {
+//                            // Login failed, do something here
+//                            //TODO create toast message indicating that user login failed
+//                            System.out.println("Failure");
+//                            Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_SHORT).show();
+//
+//                        }
+//                    }
+//                });
             }
         });
 

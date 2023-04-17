@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/this_month"
+            android:title="This month" />
+
+        <item android:id="@+id/past_3_month"
+            android:title="Past 3 months" />
+
+        <item android:id="@+id/past_6_month"
+            android:title="Past 6 months"/>
+
+        <item android:id="@+id/past_year"
+            android:title="Past Year"/>
+
+    </group>
+</menu>
