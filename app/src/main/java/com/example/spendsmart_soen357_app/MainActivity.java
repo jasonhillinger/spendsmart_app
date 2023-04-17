@@ -1,7 +1,11 @@
 package com.example.spendsmart_soen357_app;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -21,6 +25,7 @@ import com.example.spendsmart_soen357_app.Callback;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -117,6 +122,6 @@ public class MainActivity extends AppCompatActivity {
             // passed down to descendant views.
             return WindowInsetsCompat.CONSUMED;
         });
-    }
 
+}
 }

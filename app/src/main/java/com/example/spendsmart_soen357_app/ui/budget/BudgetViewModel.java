@@ -1,19 +1,23 @@
 package com.example.spendsmart_soen357_app.ui.budget;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class BudgetViewModel extends ViewModel {
+import java.util.ArrayList;
+import java.util.List;
+//display budget, addBudget, remove, getItems,
 
-    private final MutableLiveData<String> mText;
+public class BudgetViewModel<BudgetItem> extends ViewModel {
 
-    public BudgetViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is the Budget fragment");
-    }
+    private List<BudgetItem> budgetItems = new ArrayList<>();
 
-    public LiveData<String> getText() {
-        return mText;
+    //Add budget
+    public void addBudgetItem(){}
+
+    //remove budget
+    public void removeBudgetItem(){}
+
+    //get budget item
+    public List<BudgetItem> getBudgetItems() {
+        return budgetItems;
     }
 }
