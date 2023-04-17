@@ -61,14 +61,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-           // imageview = itemView.findViewById(R.id.imageview);
+            imageview = itemView.findViewById(R.id.imageview);
             priceview = itemView.findViewById(R.id.priceview);
             nameview = itemView.findViewById(R.id.nameview);
             categoryview = itemView.findViewById(R.id.categoryview);
         }
 
         public void setData(int image, String name, String price, String category) {
-           // imageview.setImageResource(image);
+            imageview.setImageResource(image);
             priceview.setText(price);
             nameview.setText(name);
             categoryview.setText(category);
