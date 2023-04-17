@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -18,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewbinding.ViewBindings;
 
 import com.example.spendsmart_soen357_app.Adapter.TransactionAdapter;
 import com.example.spendsmart_soen357_app.Model.Transaction;
@@ -36,7 +34,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView rvTransactions;
 
-    private boolean toggle_account = true;
+    private boolean toggle_account = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,9 +65,11 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 if (toggle_account){
                     Toast.makeText(getContext(), "You clicked the balance card! SHOWING CHECKING ACCCOUNT", Toast.LENGTH_SHORT).show();
+                    binding.tvBalance.setText(R.string.checkingBalance);
                     toggle_account = false;
                 }else{
                     Toast.makeText(getContext(), "You clicked the balance card! SHOWING SAVING ACCCOUNT", Toast.LENGTH_SHORT).show();
+                    binding.tvBalance.setText(R.string.savingBalance);
                     toggle_account = true;
                 }
 
