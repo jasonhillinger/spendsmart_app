@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/more_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:background="?attr/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:text="Spend Smart"
             android:textColor="@color/white"
             android:fontFamily="@font/inter_bold"
@@ -36,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="110dp"
         android:background="@drawable/white_background">
 
 
@@ -74,7 +74,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/baseline_attach_money_24" />
+                    app:srcCompat="@drawable/profile_icon" />
 
                 <TextView
                     android:id="@+id/more_profile_text"
@@ -117,7 +117,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/baseline_attach_money_24" />
+                    app:srcCompat="@drawable/setting_icon" />
 
                 <TextView
                     android:id="@+id/more_setting_text"
@@ -150,7 +150,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/baseline_attach_money_24" />
+                    app:srcCompat="@drawable/info_icon" />
 
                 <TextView
                     android:id="@+id/more_about_text"
@@ -189,7 +189,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/baseline_attach_money_24" />
+                    app:srcCompat="@drawable/question_icon" />
 
                 <TextView
                     android:id="@+id/more_FAQ_text"
@@ -222,7 +222,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/baseline_attach_money_24" />
+                    app:srcCompat="@drawable/contact_icon" />
 
                 <TextView
                     android:id="@+id/more_help_text"
@@ -262,7 +262,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/baseline_attach_money_24" />
+                    app:srcCompat="@drawable/doc_icon" />
 
                 <TextView
                     android:id="@+id/more_terms_text"

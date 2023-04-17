@@ -129,6 +129,8 @@ public class HomeFragment extends Fragment {
             popup.getMenu().findItem(R.id.past_6_month).setChecked(sixMonthSelected);
         } else if (yearSelected) {
             popup.getMenu().findItem(R.id.past_year).setChecked(yearSelected);
+        }else{
+            popup.getMenu().findItem(R.id.this_month).setChecked(true);
         }
 
 
