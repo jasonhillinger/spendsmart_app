@@ -36,6 +36,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView rvTransactions;
 
+    private boolean toggle_account = true;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -59,10 +61,18 @@ public class HomeFragment extends Fragment {
         });
 
         ConstraintLayout walletBalanceCard = binding.walletBalanceCard;
+
         walletBalanceCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "You clicked the balance card!", Toast.LENGTH_SHORT).show();
+                if (toggle_account){
+                    Toast.makeText(getContext(), "You clicked the balance card! SHOWING CHECKING ACCCOUNT", Toast.LENGTH_SHORT).show();
+                    toggle_account = false;
+                }else{
+                    Toast.makeText(getContext(), "You clicked the balance card! SHOWING SAVING ACCCOUNT", Toast.LENGTH_SHORT).show();
+                    toggle_account = true;
+                }
+
             }
         });
 
