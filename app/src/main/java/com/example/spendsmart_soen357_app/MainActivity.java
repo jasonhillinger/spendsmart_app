@@ -1,7 +1,11 @@
 package com.example.spendsmart_soen357_app;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -10,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -21,6 +26,7 @@ import com.example.spendsmart_soen357_app.Callback;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         // NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        // Manage navigation
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.popBackStack();
 
         DatabaseController db = new DatabaseController();
 
@@ -117,6 +127,6 @@ public class MainActivity extends AppCompatActivity {
             // passed down to descendant views.
             return WindowInsetsCompat.CONSUMED;
         });
-    }
 
+}
 }
