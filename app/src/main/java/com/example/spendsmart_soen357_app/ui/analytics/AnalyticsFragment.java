@@ -20,7 +20,10 @@ import com.example.spendsmart_soen357_app.databinding.FragmentAnalyticsBinding;
 import com.example.spendsmart_soen357_app.databinding.FragmentHomeBinding;
 
 import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.charts.ValueLineChart;
 import org.eazegraph.lib.models.PieModel;
+import org.eazegraph.lib.models.ValueLinePoint;
+import org.eazegraph.lib.models.ValueLineSeries;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -29,6 +32,7 @@ public class AnalyticsFragment extends Fragment {
     private FragmentAnalyticsBinding binding;
     private PieChart pieChart;
     private DatabaseController db;
+    private ValueLineChart mCubicValueLineChart;
     float grocerySum = 0;
     float clothingSum = 0;
     float electronicsSum = 0;
@@ -41,6 +45,10 @@ public class AnalyticsFragment extends Fragment {
         View root = binding.getRoot();
         db = new DatabaseController();
         PieChart pieChart = (PieChart) root.findViewById(R.id.piechart);
+        mCubicValueLineChart = (ValueLineChart) root.findViewById(R.id.cubiclinechart);
+
+        ValueLineSeries series = new ValueLineSeries();
+        series.setColor(0xFF56B7F1);
         String loggedInUser = db.LOGGEDIN_USERNAME;
         db.getTransactions(new Callback<JSONArray>() {
             @Override
@@ -108,6 +116,22 @@ public class AnalyticsFragment extends Fragment {
                 pieChart.startAnimation();
             }
         });
+
+        series.addPoint(new ValueLinePoint("Jan", 2.4f));
+        series.addPoint(new ValueLinePoint("Feb", 3.4f));
+        series.addPoint(new ValueLinePoint("Mar", .4f));
+        series.addPoint(new ValueLinePoint("Apr", 1.2f));
+        series.addPoint(new ValueLinePoint("Mai", 2.6f));
+        series.addPoint(new ValueLinePoint("Jun", 1.0f));
+        series.addPoint(new ValueLinePoint("Jul", 3.5f));
+        series.addPoint(new ValueLinePoint("Aug", 2.4f));
+        series.addPoint(new ValueLinePoint("Sep", 2.4f));
+        series.addPoint(new ValueLinePoint("Oct", 3.4f));
+        series.addPoint(new ValueLinePoint("Nov", .4f));
+        series.addPoint(new ValueLinePoint("Dec", 1.3f));
+
+        mCubicValueLineChart.addSeries(series);
+        mCubicValueLineChart.startAnimation();
 
         System.out.println("analytics page");
 

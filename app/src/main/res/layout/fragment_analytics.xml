@@ -167,7 +167,15 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
+            <org.eazegraph.lib.charts.ValueLineChart
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cubiclinechart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:egUseCubic="true"
+                app:egUseOverlapFill="true"
+                app:egCurveSmoothness="0.4"
+                app:egLegendHeight="40dp"/>
             <TextView
                 android:id="@+id/goals_title"
                 android:layout_width="match_parent"
