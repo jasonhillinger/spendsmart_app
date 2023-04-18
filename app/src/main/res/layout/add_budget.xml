@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="back"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorSecondary"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="4dp"
+        android:padding="16dp"/>
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Budget"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorSecondary"
+        android:padding="16dp"/>
+
+    <!-- Name Field -->
+    <EditText
+        android:id="@+id/nameField"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:hint="Name"
+        android:padding="16dp"/>
+
+    <!-- Category Field -->
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:padding="16dp"
+        android:entries="@array/category_list"
+      />
+
+    <!-- Price Field -->
+    <EditText
+        android:id="@+id/priceField"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:hint="Price"
+        android:inputType="numberDecimal"
+        android:padding="16dp"
+        />
+
+    <!-- Confirm Button -->
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:text="Confirm"
+        android:background="@drawable/button_component"
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        />
+
+</LinearLayout>

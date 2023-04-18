@@ -14,6 +14,15 @@
         android:theme="@style/Theme.Spendsmart_soen357_app"
         tools:targetApi="31">
         <activity android:name=".MainActivity" />
+<!--        <activity android:name=".ui.budget.AddBudgetActivity" />-->
+
+        <activity
+            android:name=".ui.budget.AddBudgetActivity"
+            android:parentActivityName=".ui.budget.BudgetFragment">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.budget.BudgetFragment"/>
+        </activity>
 
         <activity
             android:name=".LoginActivity"
