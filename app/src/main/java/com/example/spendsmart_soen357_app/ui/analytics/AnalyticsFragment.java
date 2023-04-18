@@ -31,6 +31,9 @@ public class AnalyticsFragment extends Fragment {
     private DatabaseController db;
     float grocerySum = 0;
     float clothingSum = 0;
+    float electronicsSum = 0;
+    float travelSum = 0;
+    float servicesAndSubscriptionsSum = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,6 +63,15 @@ public class AnalyticsFragment extends Fragment {
                             if (category.equals("Clothing and accessories")) {
                                 clothingSum += Float.parseFloat(obj.getString("amount"));
                             }
+                            if (category.equals("Electronics")) {
+                                electronicsSum += Float.parseFloat(obj.getString("amount"));
+                            }
+                            if (category.equals("Travel")) {
+                                travelSum += Float.parseFloat(obj.getString("amount"));
+                            }
+                            if (category.equals("Services and subscriptions")) {
+                                servicesAndSubscriptionsSum += Float.parseFloat(obj.getString("amount"));
+                            }
 
                         }
                     }
@@ -77,6 +89,22 @@ public class AnalyticsFragment extends Fragment {
                                 "Clothing",
                                 clothingSum,
                                 Color.parseColor("#56B7F1")));
+                pieChart.addPieSlice(
+                        new PieModel(
+                                "Electronics",
+                                electronicsSum,
+                                Color.parseColor("#CDA67F")));
+                pieChart.addPieSlice(
+                        new PieModel(
+                                "Travel",
+                                travelSum,
+                                Color.parseColor("#FED70E")));
+                pieChart.addPieSlice(
+                        new PieModel(
+                                "Subscriptions",
+                                servicesAndSubscriptionsSum,
+                                Color.parseColor("#AE6DA8")));
+
                 pieChart.startAnimation();
             }
         });
