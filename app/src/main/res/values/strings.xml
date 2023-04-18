@@ -1,47 +1,47 @@
 <resources>
-    <string name="app_name">SPEND SMART</string>
-    <string name="title_home">Home</string>
-    <string name="title_budget">Budget</string>
-    <string name="title_analytics">Analytics</string>
-    <string name="title_more">More</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+  <string name="app_name">SPEND SMART</string>
+  <string name="title_home">Home</string>
+  <string name="title_budget">Budget</string>
+  <string name="title_analytics">Analytics</string>
+  <string name="title_more">More</string>
+  <!-- Preference Titles -->
+  <string name="messages_header">Messages</string>
+  <string name="sync_header">Sync</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+  <!-- Messages Preferences -->
+  <string name="signature_title">Your signature</string>
+  <string name="reply_title">Default reply action</string>
 
-    <!-- local preference   -->
-    <string name="balance_menu">balance menu</string>
+  <!-- local preference   -->
+  <string name="balance_menu">balance menu</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="january">January</string>
-    <string name="february">February</string>
-    <string name="march">March</string>
-    <string name="april">April</string>
-    <string name="may">May</string>
-    <string name="june">June</string>
-    <string name="july">July</string>
-    <string name="august">August</string>
-    <string name="september">September</string>
-    <string name="october">October</string>
-    <string name="november">November</string>
-    <string name="december">December</string>
-
-
-    <string name="title_wallet">Wallet</string>
-    <string name="savingBalance">Saving Balance</string>
-    <string name="checkingBalance">Checking Balance</string>
+  <!-- Sync Preferences -->
+  <string name="sync_title">Sync email periodically</string>
+  <string name="attachment_title">Download incoming attachments</string>
+  <string name="attachment_summary_on">Automatically download attachments for incoming emails
+  </string>
+  <string name="attachment_summary_off">Only download attachments when manually requested</string>
+  <string name="january">January</string>
+  <string name="february">February</string>
+  <string name="march">March</string>
+  <string name="april">April</string>
+  <string name="may">May</string>
+  <string name="june">June</string>
+  <string name="july">July</string>
+  <string name="august">August</string>
+  <string name="september">September</string>
+  <string name="october">October</string>
+  <string name="november">November</string>
+  <string name="december">December</string>
 
 
-    <string name="aboutText1">Spend Smart is a mobile application that will enable users to build better spending habits, track their spending, and provide suggestions to better manage their finances. Allowing the users to make better decisions on spending when they view their daily, weekly and monthly charts</string>
-    <string name="aboutText2">Spending money is easy but not everyone can track their finances. This app will help people with bad spending habits, provide reminders of when bills are due and set goals for monthly spending. This will be done by providing analytical metrics for the users to know how well they saved or overspent during the time period. </string>
+  <string name="title_wallet">Wallet</string>
+  <string name="savingBalance">Saving Balance</string>
+  <string name="checkingBalance">Checking Balance</string>
+
+
+  <string name="aboutText1">Spend Smart is a mobile application that will enable users to build better spending habits, track their spending, and provide suggestions to better manage their finances. Allowing the users to make better decisions on spending when they view their daily, weekly and monthly charts</string>
+  <string name="aboutText2">Spending money is easy but not everyone can track their finances. This app will help people with bad spending habits, provide reminders of when bills are due and set goals for monthly spending. This will be done by providing analytical metrics for the users to know how well they saved or overspent during the time period. </string>
 
 
 

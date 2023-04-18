@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,13 +21,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spendsmart_soen357_app.Adapter.TransactionAdapter;
+import com.example.spendsmart_soen357_app.Callback;
+import com.example.spendsmart_soen357_app.DatabaseController;
 import com.example.spendsmart_soen357_app.Model.Transaction;
 import com.example.spendsmart_soen357_app.R;
 import com.example.spendsmart_soen357_app.databinding.FragmentHomeBinding;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.YearMonth;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class HomeFragment extends Fragment {
@@ -35,6 +48,115 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvTransactions;
 
     private boolean toggle_account = false;
+    Calendar calendar = Calendar.getInstance();
+    LocalDate currentDate = LocalDate.now();
+
+
+
+    public void setExpenseIncome(TextView expenses_view,TextView income_view,DatabaseController db, LocalDate currentDate, int radioButtonVal){
+        ArrayList<Transaction> trans = new ArrayList<Transaction>();
+        // Getting the transactions for expenses and income based on radio button selection
+        db.getTransactions(new Callback<JSONArray>() {
+            @Override
+            public void onCallback(JSONArray data) {
+                double expenses = 0;
+                double income = 0;
+                for (int i = 0; i < data.length(); i++) {
+                    try {
+                        JSONObject obj = data.getJSONObject(i);
+                        String category = obj.getString("category");
+                        String dateStr = obj.getString("date");
+                        String accountName = obj.getString("account");
+                        String nameOfSubject = obj.getString("subject");
+                        String type = obj.getString("type");
+                        String time = obj.getString("time");
+                        LocalDate date = LocalDate.parse(dateStr);
+
+                        Month month = date.getMonth();
+                        int year = date.getYear();
+                        if(radioButtonVal == R.id.this_month && month == currentDate.getMonth() && year == currentDate.getYear()){
+                            if (category.equals("income")){
+                                income += Double.parseDouble(obj.getString("amount"));
+                            }
+                            else{
+                                expenses += Double.parseDouble(obj.getString("amount"));
+                            }
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date1 = dateFormat.parse(dateStr);
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            Date time1 = timeFormat.parse(time);
+                            trans.add(new Transaction(accountName,Double.parseDouble(obj.getString("amount")
+                            ), category, nameOfSubject, type, date1, time1, ""));
+                        }
+
+                        long monthsBetween = ChronoUnit.MONTHS.between(date, currentDate);
+                        if(radioButtonVal == R.id.past_3_month && monthsBetween < 3){
+                            if (category.equals("income")){
+                                income += Double.parseDouble(obj.getString("amount"));
+                            }
+                            else{
+                                expenses += Double.parseDouble(obj.getString("amount"));
+                            }
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date1 = dateFormat.parse(dateStr);
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            Date time1 = timeFormat.parse(time);
+                            trans.add(new Transaction(accountName,Double.parseDouble(obj.getString("amount")
+                            ), category, nameOfSubject, type, date1, time1, ""));
+                        }
+
+
+                        if(radioButtonVal == R.id.past_6_month && monthsBetween < 6){
+                            if (category.equals("income")){
+                                income += Double.parseDouble(obj.getString("amount"));
+                            }
+                            else{
+                                expenses += Double.parseDouble(obj.getString("amount"));
+                            }
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date1 = dateFormat.parse(dateStr);
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            Date time1 = timeFormat.parse(time);
+                            trans.add(new Transaction(accountName,Double.parseDouble(obj.getString("amount")
+                            ), category, nameOfSubject, type, date1, time1, ""));
+                        }
+
+
+                        if(radioButtonVal == R.id.past_year && monthsBetween < 12){
+                            if (category.equals("income")){
+                                income += Double.parseDouble(obj.getString("amount"));
+                            }
+                            else{
+                                expenses += Double.parseDouble(obj.getString("amount"));
+                            }
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date1 = dateFormat.parse(dateStr);
+                            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+                            Date time1 = timeFormat.parse(time);
+                            trans.add(new Transaction(accountName,Double.parseDouble(obj.getString("amount")
+                            ), category, nameOfSubject, type, date1, time1, ""));
+                        }
+
+
+                        System.out.println("TEST");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+                System.out.println(income);
+                String income_str = String.format("%.2f",income);
+                income_view.setText("$ " + income_str);
+                String expenses_str = String.format("%.2f",expenses);
+                expenses_view.setText("$ " + expenses_str);
+                // Set transaction view
+                recyclerViewTransaction(getContext(),trans);
+            }
+        });
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,40 +166,140 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
+
+        DatabaseController db = new DatabaseController();
+
         //final TextView textView = binding.textHome;
         //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // Setting good morning message for user
+        TextView welcome_message = root.findViewById(R.id.welcome_message);
+        welcome_message.setText("Good Morning, " + db.getLOGGEDIN_USER() + "!");
+
+
+
+        // Setting the checking account balance for the user
+        TextView balance = root.findViewById(R.id.tv_balance_value);
+        db.getCheckingAccountFunds(new Callback<String>() {
+            @Override
+            public void onCallback(String data) {
+                // Do something with the data
+                balance.setText("$ "+data);
+//                System.out.println(data);
+            }
+        });
+
+        TextView expenses_view = root.findViewById(R.id.tv_expense_value);
+        TextView income_view = root.findViewById(R.id.tv_income_value);
+
+        setExpenseIncome(expenses_view,income_view,db,currentDate, R.id.this_month);
 
         //Setup UI elements
         setupUI(root);
 
         Button month = binding.btnMonth;
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        final int[] lastSelectedId = {sharedPref.getInt("lastSelectedId", R.id.this_month)};
+
         month.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showMenu(getContext(),view, R.menu.balance_menu);
+                PopupMenu popup = new PopupMenu(getContext(), view);
+                popup.inflate(R.menu.balance_menu);
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.this_month:
+                                item.setChecked(true);
+                                lastSelectedId[0] = R.id.this_month;
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putInt("lastSelectedId", R.id.this_month);
+                                editor.apply();
+
+                                setExpenseIncome(expenses_view,income_view,db,currentDate,R.id.this_month);
+
+
+                                break;
+                            case R.id.past_3_month:
+                                item.setChecked(true);
+                                lastSelectedId[0] = R.id.past_3_month;
+                                SharedPreferences.Editor editor1 = sharedPref.edit();
+                                editor1.putInt("lastSelectedId", R.id.past_3_month);
+                                editor1.apply();
+
+                                // Add onClickListener for this case
+                                setExpenseIncome(expenses_view,income_view,db,currentDate,R.id.past_3_month);
+
+                                break;
+                            case R.id.past_6_month:
+                                item.setChecked(true);
+                                lastSelectedId[0] = R.id.past_6_month;
+                                SharedPreferences.Editor editor2 = sharedPref.edit();
+                                editor2.putInt("lastSelectedId", R.id.past_6_month);
+                                editor2.apply();
+
+                                setExpenseIncome(expenses_view,income_view,db,currentDate,R.id.past_6_month);
+
+                                break;
+                            case R.id.past_year:
+                                item.setChecked(true);
+                                lastSelectedId[0] = R.id.past_year;
+                                SharedPreferences.Editor editor3 = sharedPref.edit();
+                                editor3.putInt("lastSelectedId", R.id.past_year);
+                                editor3.apply();
+                                setExpenseIncome(expenses_view,income_view,db,currentDate,R.id.past_year);
+
+                                break;
+                            default:
+                                return false;
+                        }
+
+                        return true;
+                    }
+                });
+
+                // Set the default checked radio button before showing the popup
+                MenuItem lastSelectedMenuItem = popup.getMenu().findItem(lastSelectedId[0]);
+                lastSelectedMenuItem.setChecked(true);
+
+                popup.show();
             }
         });
 
         ConstraintLayout walletBalanceCard = binding.walletBalanceCard;
-
         walletBalanceCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (toggle_account){
-                    Toast.makeText(getContext(), "You clicked the balance card! SHOWING CHECKING ACCCOUNT", Toast.LENGTH_SHORT).show();
+                    db.getCheckingAccountFunds(new Callback<String>() {
+                        @Override
+                        public void onCallback(String data) {
+                            // Do something with the data
+                            balance.setText("$ "+data);
+//                System.out.println(data);
+                        }
+                    });
                     binding.tvBalance.setText(R.string.checkingBalance);
                     toggle_account = false;
                 }else{
-                    Toast.makeText(getContext(), "You clicked the balance card! SHOWING SAVING ACCCOUNT", Toast.LENGTH_SHORT).show();
                     binding.tvBalance.setText(R.string.savingBalance);
+                    db.getSavingAccountFunds(new Callback<String>() {
+                        @Override
+                        public void onCallback(String data) {
+                            // Do something with the data
+                            balance.setText("$ "+data);
+//                System.out.println(data);
+                        }
+                    });
                     toggle_account = true;
                 }
 
             }
         });
 
-        // Set transaction view
-        recyclerViewTransaction(getContext());
 
         return root;
     }
@@ -86,42 +308,8 @@ public class HomeFragment extends Fragment {
         rvTransactions = v.findViewById(R.id.view_transaction);
     }
 
-    private void recyclerViewTransaction(Context context) {
-        ArrayList<Transaction> transactions = new ArrayList<>();
-
-        Date date1 = null;
-        Date date2 = null;
-        Date time1 = null;
-        Date time2 = null;
-
-        try{
-            // Formatting the date and time
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            date1 = dateFormat.parse("2023-04-20");
-            date2 = dateFormat.parse("2023-04-15");
-            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-            time1 = timeFormat.parse("04:20");
-            time2 = timeFormat.parse("06:20");
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        transactions.add(new Transaction("Checking Account",140.00,"Food and groceries","Tim Hortons",
-                "Purchase",date1,time1, "Jackey"));
-
-        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Spotify Premium",
-                "Purchase",date2,time2, "Jackey"));
-
-        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Transfer",
-                "Income",date2,time2, "Jackey"));
-
-        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Transfer",
-                "Income",date2,time2, "Jackey"));
-
-        transactions.add(new Transaction("Checking Account",10.00,"Services and subscriptions","Transfer",
-                "Income",date2,time2, "Jackey"));
+    private void recyclerViewTransaction(Context context, ArrayList<Transaction> trans) {
+        ArrayList<Transaction> transactions = trans;
 
 
         adapter = new TransactionAdapter(getActivity(), transactions);

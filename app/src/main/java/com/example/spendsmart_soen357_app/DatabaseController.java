@@ -27,6 +27,10 @@ public class DatabaseController {
         LOGGEDIN_USERNAME = LOGGEDIN_USER;
     }
 
+    public static String getLOGGEDIN_USER(){
+        return  LOGGEDIN_USERNAME;
+    }
+
     public void login(String username, String password, Callback<Boolean> callback) {
         new LoginTask(username, password,  callback).execute();
     }
@@ -48,7 +52,8 @@ public class DatabaseController {
                         transactionJson.put("account", dataSnapshot.child("account").getValue());
                         transactionJson.put("amount", dataSnapshot.child("amount").getValue());
                         transactionJson.put("category", dataSnapshot.child("category").getValue());
-//                        transactionJson.put("date", dataSnapshot.child("date").getValue()); // TODO: maybe implement date of purchase
+                        transactionJson.put("date", dataSnapshot.child("date").getValue()); // TODO: maybe implement date of purchase
+                        transactionJson.put("time", dataSnapshot.child("time").getValue());
                         transactionJson.put("subject", dataSnapshot.child("subject").getValue());
                         transactionJson.put("type", dataSnapshot.child("type").getValue());
                         transactionJson.put("username", dataSnapshot.child("username").getValue());
