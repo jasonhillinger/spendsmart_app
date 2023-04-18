@@ -38,20 +38,40 @@ public class AnalyticsFragment extends Fragment {
         db.getTransactions(new Callback<JSONArray>() {
             @Override
             public void onCallback(JSONArray data) {
+                double grocery = 0.0;
+                try {
+
                 for (int i = 0; i < data.length(); i++) {
-                    try {
+
                         JSONObject obj = data.getJSONObject(i);
                         System.out.println("");
+                        String user_name = obj.getString("username");
+                        boolean iscorrrectUser = user_name == db.getLOGGEDIN_USER();
+
+
+                        if (iscorrrectUser)
+                        {
+                           String category = obj.getString("category");
+                           if (category == "Food and groceries")
+                           {
+                               grocery = grocery + Double.parseDouble(obj.getString("amount"));
+                           }
+
+                        }
+
+
                     }
-                    catch (Exception e){
-                        System.out.println(e);
-                    }
+                    pieChart.addPieSlice(
+                            new PieModel(
+                                    "Grocery",
+                                    grocery,
+                                    ResourcesCompat.getColor(getResources(), R.color.teal_200, null)));
+
                 }
-                pieChart.addPieSlice(
-                        new PieModel(
-                                "Lifestyle",
-                                25,
-                                ResourcesCompat.getColor(getResources(), R.color.teal_200, null)));
+                catch (Exception e){
+                    System.out.println(e);
+                }
+
             }
         });
 
@@ -65,7 +85,7 @@ public class AnalyticsFragment extends Fragment {
 //                        ResourcesCompat.getColor(getResources(), R.color.purple_700, null)));
 //        pieChart.addPieSlice(
 //                new PieModel(
-//                        "Grocery",
+//                        "Lifestyle",
 //                        25,
 //                        ResourcesCompat.getColor(getResources(), R.color.purple_200, null)));
 //        pieChart.addPieSlice(
