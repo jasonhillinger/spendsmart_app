@@ -276,12 +276,26 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (toggle_account){
-                    Toast.makeText(getContext(), "You clicked the balance card! SHOWING CHECKING ACCCOUNT", Toast.LENGTH_SHORT).show();
+                    db.getCheckingAccountFunds(new Callback<String>() {
+                        @Override
+                        public void onCallback(String data) {
+                            // Do something with the data
+                            balance.setText("$ "+data);
+//                System.out.println(data);
+                        }
+                    });
                     binding.tvBalance.setText(R.string.checkingBalance);
                     toggle_account = false;
                 }else{
-                    Toast.makeText(getContext(), "You clicked the balance card! SHOWING SAVING ACCCOUNT", Toast.LENGTH_SHORT).show();
                     binding.tvBalance.setText(R.string.savingBalance);
+                    db.getSavingAccountFunds(new Callback<String>() {
+                        @Override
+                        public void onCallback(String data) {
+                            // Do something with the data
+                            balance.setText("$ "+data);
+//                System.out.println(data);
+                        }
+                    });
                     toggle_account = true;
                 }
 
