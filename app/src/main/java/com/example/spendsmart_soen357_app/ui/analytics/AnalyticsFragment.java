@@ -1,5 +1,6 @@
 package com.example.spendsmart_soen357_app.ui.analytics;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,69 +43,45 @@ public class AnalyticsFragment extends Fragment {
             @Override
             public void onCallback(JSONArray data) {
                 try {
-                for (int i = 0; i < data.length(); i++) {
+                    for (int i = 0; i < data.length(); i++) {
 
 
                         JSONObject obj = data.getJSONObject(i);
                         System.out.println("");
                         String user_name = obj.getString("username");
-                        boolean isCorrectUser = user_name == loggedInUser;
+                        boolean isCorrectUser = user_name.equals(loggedInUser);
 
-                        if (isCorrectUser){
-                            switch (obj.getString("category")){
-                                case "Food and groceries":
-                                    // increase amount for pie slice of grocery
-                                    grocerySum += Float.parseFloat(obj.getString("amount"));
-                                case "Clothing and accessories":
-                                    clothingSum += Float.parseFloat(obj.getString("amount"));
-                                default:
-                                    System.out.println("default category");
+                        if (isCorrectUser) {
+                            String category = obj.getString("category");
+                            if (category.equals("Food and groceries")) {
+                                // increase amount for pie slice of grocery
+                                grocerySum += Float.parseFloat(obj.getString("amount"));
                             }
+                            if (category.equals("Clothing and accessories")) {
+                                clothingSum += Float.parseFloat(obj.getString("amount"));
+                            }
+
                         }
                     }
-                    pieChart.addPieSlice(
-                            new PieModel(
-                                    "Grocery",
-                                    grocerySum,
-                                    ResourcesCompat.getColor(getResources(), R.color.teal_200, null)));
-                    pieChart.addPieSlice(
-                            new PieModel(
-                                    "Clothing",
-                                    grocerySum,
-                                    ResourcesCompat.getColor(getResources(), R.color.purple_200, null)));
-
                 }
                 catch (Exception e){
                     System.out.println(e);
                 }
-
+                pieChart.addPieSlice(
+                        new PieModel(
+                                "Grocery",
+                                grocerySum,
+                                Color.parseColor("#FE6DA8")));
+                pieChart.addPieSlice(
+                        new PieModel(
+                                "Clothing",
+                                clothingSum,
+                                Color.parseColor("#56B7F1")));
+                pieChart.startAnimation();
             }
         });
 
-
-
-
-//        pieChart.addPieSlice(
-//                new PieModel(
-//                        "Transport",
-//                        25,
-//                        ResourcesCompat.getColor(getResources(), R.color.purple_700, null)));
-//        pieChart.addPieSlice(
-//                new PieModel(
-//                        "Grocery",
-//                        25,
-//                        ResourcesCompat.getColor(getResources(), R.color.purple_200, null)));
-//        pieChart.addPieSlice(
-//                new PieModel(
-//                        "Invest",
-//                        25,
-//                        ResourcesCompat.getColor(getResources(), R.color.dark_blue, null)));
-//        AnalyticsViewModel analyticsViewModel =
-//                new ViewModelProvider(this).get(AnalyticsViewModel.class);
-        pieChart.startAnimation();
         System.out.println("analytics page");
-
-
 
         return root;
     }
