@@ -38,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.YearMonth;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,13 +51,11 @@ public class HomeFragment extends Fragment {
 
     private boolean toggle_account = false;
     Calendar calendar = Calendar.getInstance();
-    int currentMonth = calendar.get(Calendar.MONTH) + 1;
-    int currentYear = calendar.get(Calendar.YEAR);
+    LocalDate currentDate = LocalDate.now();
 
 
 
-    public void setExpenseIncome(TextView expenses_view,TextView income_view,DatabaseController db, int currentMonth, int radioButtonVal){
-        String date_time_radio = "this_month";
+    public void setExpenseIncome(TextView expenses_view,TextView income_view,DatabaseController db, LocalDate currentDate, int radioButtonVal){
         ArrayList<Transaction> trans = new ArrayList<Transaction>();
         // Getting the transactions for expenses and income based on radio button selection
         db.getTransactions(new Callback<JSONArray>() {
@@ -75,9 +74,9 @@ public class HomeFragment extends Fragment {
                         String time = obj.getString("time");
                         LocalDate date = LocalDate.parse(dateStr);
 
-                        int month = date.getMonthValue();
+                        Month month = date.getMonth();
                         int year = date.getYear();
-                        if(radioButtonVal == R.id.this_month && month == currentMonth){
+                        if(radioButtonVal == R.id.this_month && month == currentDate.getMonth() && year == currentDate.getYear()){
                             if (category.equals("income")){
                                 income += Double.parseDouble(obj.getString("amount"));
                             }
@@ -92,8 +91,8 @@ public class HomeFragment extends Fragment {
                             ), category, nameOfSubject, type, date1, time1, ""));
                         }
 
-                        boolean monthCheckPast3Month = ( (month == currentMonth )|| (month == currentMonth -1 ) || (month == currentMonth -2 ) ) && (year == currentYear);
-                        if(radioButtonVal == R.id.past_3_month && monthCheckPast3Month){
+                        long monthsBetween = ChronoUnit.MONTHS.between(date, currentDate);
+                        if(radioButtonVal == R.id.past_3_month && monthsBetween < 3){
                             if (category.equals("income")){
                                 income += Double.parseDouble(obj.getString("amount"));
                             }
@@ -108,8 +107,8 @@ public class HomeFragment extends Fragment {
                             ), category, nameOfSubject, type, date1, time1, ""));
                         }
 
-                        boolean monthCheckPast6Month = ( (month == currentMonth ) || (month == currentMonth -1 ) || (month == currentMonth -2 )  || (month == currentMonth -3 )  || (month == currentMonth -4 ) || (month == currentMonth -5 ) ) && (year == currentYear);
-                        if(radioButtonVal == R.id.past_6_month && monthCheckPast6Month){
+
+                        if(radioButtonVal == R.id.past_6_month && monthsBetween < 6){
                             if (category.equals("income")){
                                 income += Double.parseDouble(obj.getString("amount"));
                             }
@@ -124,8 +123,8 @@ public class HomeFragment extends Fragment {
                             ), category, nameOfSubject, type, date1, time1, ""));
                         }
 
-                        boolean monthCheckPastYear = ( (month == currentMonth )|| (month == currentMonth -1 ) || (month == currentMonth -2 )  || (month == currentMonth -3 )  || (month == currentMonth -4 ) || (month == currentMonth -5 ) || (month == currentMonth -6 )|| (month == currentMonth -7 ) || (month == currentMonth -8 )  || (month == currentMonth -9 )  || (month == currentMonth -10 ) || (month == currentMonth -11 ) ) && ( (year == currentYear - 1) || (year == currentYear));
-                        if(radioButtonVal == R.id.past_year && monthCheckPastYear){
+
+                        if(radioButtonVal == R.id.past_year && monthsBetween < 12){
                             if (category.equals("income")){
                                 income += Double.parseDouble(obj.getString("amount"));
                             }
@@ -196,7 +195,7 @@ public class HomeFragment extends Fragment {
         TextView expenses_view = root.findViewById(R.id.tv_expense_value);
         TextView income_view = root.findViewById(R.id.tv_income_value);
 
-        setExpenseIncome(expenses_view,income_view,db,currentMonth, R.id.this_month);
+        setExpenseIncome(expenses_view,income_view,db,currentDate, R.id.this_month);
 
         //Setup UI elements
         setupUI(root);
@@ -222,7 +221,7 @@ public class HomeFragment extends Fragment {
                                 editor.putInt("lastSelectedId", R.id.this_month);
                                 editor.apply();
 
-                                setExpenseIncome(expenses_view,income_view,db,currentMonth,R.id.this_month);
+                                setExpenseIncome(expenses_view,income_view,db,currentDate,R.id.this_month);
 
 
                                 break;
@@ -234,7 +233,7 @@ public class HomeFragment extends Fragment {
                                 editor1.apply();
 
                                 // Add onClickListener for this case
-                                setExpenseIncome(expenses_view,income_view,db,currentMonth,R.id.past_3_month);
+                                setExpenseIncome(expenses_view,income_view,db,currentDate,R.id.past_3_month);
 
                                 break;
                             case R.id.past_6_month:
@@ -244,7 +243,7 @@ public class HomeFragment extends Fragment {
                                 editor2.putInt("lastSelectedId", R.id.past_6_month);
                                 editor2.apply();
 
-                                setExpenseIncome(expenses_view,income_view,db,currentMonth,R.id.past_6_month);
+                                setExpenseIncome(expenses_view,income_view,db,currentDate,R.id.past_6_month);
 
                                 break;
                             case R.id.past_year:
@@ -253,7 +252,7 @@ public class HomeFragment extends Fragment {
                                 SharedPreferences.Editor editor3 = sharedPref.edit();
                                 editor3.putInt("lastSelectedId", R.id.past_year);
                                 editor3.apply();
-                                setExpenseIncome(expenses_view,income_view,db,currentMonth,R.id.past_year);
+                                setExpenseIncome(expenses_view,income_view,db,currentDate,R.id.past_year);
 
                                 break;
                             default:
