@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.WindowCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.spendsmart_soen357_app.MainActivity;
 import com.example.spendsmart_soen357_app.R;
@@ -46,9 +48,7 @@ public class AboutActivity  extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AboutActivity.this, MoreFragment.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
     }
