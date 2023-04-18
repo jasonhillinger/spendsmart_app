@@ -91,27 +91,27 @@ public class AnalyticsFragment extends Fragment {
                         new PieModel(
                                 "Grocery",
                                 grocerySum,
-                                Color.parseColor("#FE6DA8")));
+                                Color.parseColor("#FF03DAC5")));
                 pieChart.addPieSlice(
                         new PieModel(
                                 "Clothing",
                                 clothingSum,
-                                Color.parseColor("#56B7F1")));
+                                Color.parseColor("#FF018786")));
                 pieChart.addPieSlice(
                         new PieModel(
                                 "Electronics",
                                 electronicsSum,
-                                Color.parseColor("#CDA67F")));
+                                Color.parseColor("#FFBB86FC")));
                 pieChart.addPieSlice(
                         new PieModel(
                                 "Travel",
                                 travelSum,
-                                Color.parseColor("#FED70E")));
+                                Color.parseColor("#151A50")));
                 pieChart.addPieSlice(
                         new PieModel(
                                 "Subscriptions",
                                 servicesAndSubscriptionsSum,
-                                Color.parseColor("#AE6DA8")));
+                                Color.parseColor("#F30A18")));
 
                 pieChart.startAnimation();
             }

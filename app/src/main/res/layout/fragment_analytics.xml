@@ -83,18 +83,18 @@
                             android:layout_height="15dp"
                             android:layout_gravity="center_vertical">
 
-                            <!--View to display the yellow color icon-->
+
                             <View
                                 android:layout_width="15dp"
                                 android:layout_height="match_parent"
                                 android:background="@color/teal_200" />
 
-                            <!--Text view to display R -->
                             <TextView
+                                android:id="@+id/grocery_id"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="10dp"
-                                android:text="Lifestyle" />
+                                android:text="Grocery" />
 
                         </LinearLayout>
 
@@ -109,56 +109,80 @@
                                 android:layout_height="match_parent"
                                 android:background="@color/purple_700" />
 
-                            <!--Text view to display python text -->
+
                             <TextView
+                                android:id="@+id/clothing_id"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="10dp"
-                                android:text="Transport" />
+                                android:text="Clothing" />
 
                         </LinearLayout>
 
-                        <!--Linear layout to display C++-->
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="15dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="5dp">
 
-                            <!--View to display the red color icon-->
+
                             <View
                                 android:layout_width="15dp"
                                 android:layout_height="match_parent"
                                 android:background="@color/purple_200" />
 
-                            <!--Text view to display C++ text -->
+
                             <TextView
+                                android:id="@+id/electronics_id"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="10dp"
-                                android:text="Grocery" />
+                                android:text="Electronics" />
 
                         </LinearLayout>
 
-                        <!--Linear layout to display Java-->
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="15dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginTop="5dp">
 
-                            <!--View to display the blue color icon-->
+
                             <View
                                 android:layout_width="15dp"
                                 android:layout_height="match_parent"
                                 android:background="@color/dark_blue" />
 
-                            <!--Text view to display Java text -->
+
                             <TextView
+                                android:id="@+id/travel_id"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingLeft="10dp"
                                 android:text="Invest" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="5dp">
+
+
+                            <View
+                                android:layout_width="15dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/red" />
+
+
+                            <TextView
+                                android:id="@+id/sunscriptions_id"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="10dp"
+                                android:text="Subcriptions" />
 
                         </LinearLayout>
 
