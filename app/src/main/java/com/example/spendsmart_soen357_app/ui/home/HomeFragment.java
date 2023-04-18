@@ -339,9 +339,6 @@ public class HomeFragment extends Fragment {
         }else{
             popup.getMenu().findItem(R.id.this_month).setChecked(true);
         }
-        else{
-            popup.getMenu().findItem(R.id.this_month).setChecked(true);
-        }
 
 
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

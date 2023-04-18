@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
 //    private ActivityMainBinding binding;
 
     // Set to true if you want to skip login for debugging purposes
-    private boolean DEBUG_MODE = false;
+    private boolean DEBUG_MODE = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
