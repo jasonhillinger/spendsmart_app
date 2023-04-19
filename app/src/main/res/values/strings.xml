@@ -45,4 +45,14 @@
 
 
 
+    <string-array name="category_list">
+        <item>Food and Groceries</item>
+        <item>Clothing and Accessories</item>
+        <item>Electronics</item>
+        <item>Travel</item>
+        <item>Services and Subscriptions</item>
+        <item>Income</item>
+    </string-array>
+
+
 </resources>

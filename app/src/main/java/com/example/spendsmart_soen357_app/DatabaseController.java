@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class DatabaseController {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private static String LOGGEDIN_USERNAME = null;
+    public static String LOGGEDIN_USERNAME = null;
     private static String LOGGEDIN_CHECKING = null;
 
     public interface LoginCallback {
