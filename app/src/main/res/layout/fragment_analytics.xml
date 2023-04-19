@@ -34,8 +34,10 @@
         android:background="@drawable/white_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/banner_analytics">
+        app:layout_constraintTop_toBottomOf="@+id/banner_analytics"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -164,6 +166,7 @@
                                 android:text="Invest" />
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="15dp"
@@ -191,31 +194,112 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-            <org.eazegraph.lib.charts.ValueLineChart
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/cubiclinechart"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:egUseCubic="true"
-                app:egUseOverlapFill="true"
-                app:egCurveSmoothness="0.4"
-                app:egLegendHeight="40dp"/>
+
             <TextView
-                android:id="@+id/goals_title"
+                android:id="@+id/projection_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/inter_semibold"
-                android:text="Goals"
+                android:text="Projection"
                 android:textColor="?attr/colorSecondary"
                 android:textSize="20sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <org.eazegraph.lib.charts.ValueLineChart xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cubiclinechart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:egCurveSmoothness="0.4"
+                app:egLegendHeight="40dp"
+                app:egUseCubic="true"
+                app:egUseOverlapFill="true" />
+
+            <TextView
+                android:id="@+id/goals_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="Goals Progress"
+                android:textColor="?attr/colorSecondary"
+                android:textSize="20sp" />
+
+            <!--            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/goals_rv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" />-->
+
+
+            <!--   <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/budget_list_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/linear_Layout"
+                android:layout_margin="0dp"
+                tools:listitem="@layout/goalsprogress_item2" />-->
+
+
+            <TextView
+                android:id="@+id/firstgoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Personal (9%)                                                     $9.08/$100        "
+                android:textColor="@color/dark_blue"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/firstpb"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:progress="9" />
+
+            <TextView
+                android:id="@+id/secondgoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Food (27%)                                                        $27.24/ $200        "
+                android:textColor="@color/dark_blue"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/secondpb"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:progress="27" />
+
+            <TextView
+                android:id="@+id/thirdgoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Clothing (96%)                                                    $96.07/$100        "
+                android:textColor="@color/dark_blue"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/thirdpb"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:progress="96" />
+
 
         </LinearLayout>
     </ScrollView>
