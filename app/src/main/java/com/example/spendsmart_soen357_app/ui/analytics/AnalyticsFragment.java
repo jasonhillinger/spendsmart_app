@@ -39,6 +39,12 @@ public class AnalyticsFragment extends Fragment {
     float travelSum = 0;
     float servicesAndSubscriptionsSum = 0;
 
+    public void addMoneyToTextView(TextView text, float value){
+        String originalText = text.getText().toString();
+        String newText = originalText + ": $" + Float.toString(value);
+        text.setText(newText);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAnalyticsBinding.inflate(inflater, container, false);
@@ -113,9 +119,26 @@ public class AnalyticsFragment extends Fragment {
                                 servicesAndSubscriptionsSum,
                                 Color.parseColor("#F30A18")));
 
+                TextView groceries_view = root.findViewById(R.id.grocery_id);
+                addMoneyToTextView(groceries_view,grocerySum);
+
+                TextView clothing_view = root.findViewById(R.id.clothing_id);
+                addMoneyToTextView(clothing_view,clothingSum);
+
+                TextView electronics_view = root.findViewById(R.id.electronics_id);
+                addMoneyToTextView(electronics_view,electronicsSum);
+
+                TextView invest_view = root.findViewById(R.id.travel_id);
+                addMoneyToTextView(invest_view,travelSum);
+
+                TextView sub_view = root.findViewById(R.id.subscriptions_id);
+                addMoneyToTextView(sub_view ,servicesAndSubscriptionsSum);
+
                 pieChart.startAnimation();
             }
         });
+
+
 
         series.addPoint(new ValueLinePoint("Jan", 2.4f));
         series.addPoint(new ValueLinePoint("Feb", 3.4f));
