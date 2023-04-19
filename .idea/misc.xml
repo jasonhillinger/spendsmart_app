@@ -7,10 +7,14 @@
         <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/drawable/circle_button_background.xml" value="0.1" />
         <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/drawable/ic_add.xml" value="0.169" />
         <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.252" />
+        <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/drawable/ic_electronics.xml" value="0.115" />
+        <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/drawable/ic_services_and_subscriptions.xml" value="0.1" />
         <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/drawable/ic_subscriptions.xml" value="0.279" />
         <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/drawable/ic_travel.xml" value="0.13" />
+        <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/layout/activity_main.xml" value="0.165" />
-        <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/layout/budget_item.xml" value="0.375" />
+        <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/layout/add_budget.xml" value="0.25" />
+        <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/layout/budget_item.xml" value="0.165" />
         <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/layout/fragment_analytics.xml" value="0.24048913043478262" />
         <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/layout/fragment_budget.xml" value="0.335" />
         <entry key="..\:/Users/anjal/Documents/spendsmart_app/app/src/main/res/layout/list_view_layout.xml" value="0.1" />
