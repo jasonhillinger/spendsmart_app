@@ -1,4 +1,4 @@
-# Spend Smart Mobile Application -SOEN 357 UI/UX App
+# Spend Smart Mobile Application - SOEN 357 UI/UX App
 
 ### Youtube Video
 https://youtu.be/vInVQt9Z9ik
