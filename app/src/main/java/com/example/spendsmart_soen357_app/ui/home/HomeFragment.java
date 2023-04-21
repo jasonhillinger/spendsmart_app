@@ -198,9 +198,13 @@ public class HomeFragment extends Fragment {
         //Setup UI elements
         setupUI(root);
 
+
         Button month = binding.btnMonth;
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        final int[] lastSelectedId = {sharedPref.getInt("lastSelectedId", R.id.this_month)};
+//        sharedPref.edit().putInt("lasSelectedId",R.id.this_month);
+//        final int[] lastSelectedId = {sharedPref.getInt("lastSelectedId", R.id.this_month)};
+        final int[] lastSelectedId =  {R.id.this_month};
+
 
         month.setOnClickListener(new View.OnClickListener() {
             @Override
