@@ -3,7 +3,7 @@
 ### Youtube Video
 https://youtu.be/vInVQt9Z9ik
 
-### How to run the file
+### How to run the application
 1. Download Android Studio 
 2. Open the source folder in Android Studio (or clone it from the github repository)
 3. Build the project. This can be done by clicking the hammer icon to the top right of the navigation bar
